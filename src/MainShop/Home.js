@@ -1,70 +1,51 @@
-import { Menu } from "./Menu";
-import { Footer } from "./Footer";
-import { NavBar } from "./NavBar";
+import { MainBanner } from "./MainBanner";
 import { Left } from "./Left";
 import { Right } from "./Right";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { HeaderBar } from "./HeaderBar";
-import { Search } from "./Search";
-import { Login } from "./Login";
-import { Mypage } from "./Mypage";
-import { Poket } from "./Poket";
-import { NewItem } from "./NewItem";
-import { BestItem } from "./BestItem";
+import { Footer } from "./Footer";
 
 const Container = styled.div`
-  width: calc(100vw-10px);
+  width: calc(100vw);
 `;
-const StyledHeaderBar = styled.div`
+// const StyledHeaderBar = styled.div`
+//   width: 100%;
+//   height: 70px;
+//   background-color: lightblue;
+//   display: grid;
+//   grid-template-columns: 15% 45% 10% 10% 10% 10%;
+// `;
+const StyledMainBanner = styled.div`
   width: 100%;
-  height: 70px;
-  background-color: lightblue;
-  display: grid;
-  grid-template-columns: 15% 45% 10% 10% 10% 10%;
-`;
-const StyledNav = styled.div`
-  width: 100%;
-  height: 400px;
+  height: 780px;
   background-color: lightcoral;
 `;
 const StyledMain = styled.div`
   width: 100%;
   height: 400px;
-  display: grid;
-  grid-template-columns: 50% 50%;
 `;
-const StyledFooter = styled.div`
-  width: 100%;
-  height: 100px;
-  background-color: lightcyan;
-`;
+// const StyledFooter = styled.div`
+//   width: 100%;
+//   height: 100%;
+//   margin: 50px;
+// `;
 
 export function Home() {
   return (
     <>
       <Container>
-        <StyledHeaderBar>
-          <HeaderBar>
-            <Menu>
-              <BestItem />
-              <NewItem />
-            </Menu>
-            <Search />
-            <Login />
-            <Mypage />
-            <Poket />
-          </HeaderBar>
-        </StyledHeaderBar>
-        <StyledNav>
-          <NavBar />
-        </StyledNav>
+        <StyledMainBanner>
+          <MainBanner />
+        </StyledMainBanner>
         <StyledMain>
+          <Link to="/BestItem" />
           <Left />
+        </StyledMain>
+        <StyledMain>
+          <Link to="/NewItem" />
           <Right />
         </StyledMain>
-        <StyledFooter>
-          <Footer />
-        </StyledFooter>
       </Container>
     </>
   );

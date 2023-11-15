@@ -1,6 +1,9 @@
 import { QueryClient, QueryClientProvider } from "react-query";
-import { LayoutApp } from "./MainShop/LayoutApp";
+import { Home } from "./MainShop/Home";
 import { createGlobalStyle } from "styled-components";
+import { BestItem } from "./MainShop/BestItem";
+import { NerdyShop } from "./MainShop/NerdyShop";
+import { Item } from "./MainShop/Item";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -17,7 +20,7 @@ export default function App() {
     <>
       <GlobalStyle />
       <QueryClientProvider client={client}>
-        <LayoutApp />
+        <NerdyShop />
       </QueryClientProvider>
     </>
   );

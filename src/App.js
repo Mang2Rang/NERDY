@@ -1,15 +1,15 @@
 import { QueryClient, QueryClientProvider } from "react-query";
-import { Home } from "./MainShop/Home";
+import { Home } from "./MainShop/Body/Home";
 import { createGlobalStyle } from "styled-components";
-import { BestItem } from "./MainShop/BestItem";
+import { BestItem } from "./MainShop/Header/BestItem";
 import { NerdyShop } from "./MainShop/NerdyShop";
-import { Item } from "./MainShop/Item";
+import { Item } from "./MainShop/Body/Item";
 
 const GlobalStyle = createGlobalStyle`
   * {
     margin : 0;
     padding : 0;
-    box-sizing: border-box;
+    box-sizing: border-box;    
   }
 `;
 

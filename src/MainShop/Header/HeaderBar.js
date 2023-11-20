@@ -36,13 +36,89 @@ const NavMid = styled.div`
 const Ul = styled.ul`
   display: flex;
   list-style: none;
+  gap: 1rem;
 `;
 
 const Li = styled.li`
-  font-weight: 500;
+  font-weight: 600;
   font-size: 15px;
   padding: 0 10px;
-  gap: 1.5rem;
+  color: black;
+  //Li의 요소 중 첫번째 자식만 속성을 다르게 주고 싶어서 작성문 부분.
+  :nth-child(1) {
+    color: #7a2bdf;
+    &::before {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border-top: 2px solid #7a2bdf;
+      transition: width 300ms ease-in-out;
+    }
+    &:hover::before {
+      width: 100%;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 100%;
+      bottom: 0;
+      left: 0;
+      border-bottom: 2px solid #7a2bdf;
+      transition: width 300ms ease-in-out;
+      transition-delay: 0.2s;
+    }
+    &:hover::after {
+      width: 100%;
+    }
+  }
+`;
+//Li 의 nth 차일드 요소가 적용이 안되는 의심되는 부분
+// 이유 : <Ul>
+//          <Li>
+//            <CusNavLink>
+//            여기에 코멘트가 작성되어있음.
+//            </CusNavLink>
+//          </Li>
+//        </Ul>
+
+const CusNavLink = styled(NavLink)`
+  position: relative;
+  padding: 2px 0 2px 0;
+  cursor: pointer;
+  width: 0%;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-top: 2px solid black;
+    transition: width 300ms ease-in-out;
+  }
+  &:hover::before {
+    width: 100%;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    border-bottom: 2px solid black;
+    transition: width 300ms ease-in-out;
+    transition-delay: 0.2s;
+  }
+  &:hover::after {
+    width: 100%;
+  }
 `;
 const LiSmall = styled.li`
   font-size: 13px;
@@ -50,11 +126,6 @@ const LiSmall = styled.li`
 `;
 const LiBar = styled.li`
   color: #eaeaea;
-`;
-
-const The8 = styled.div`
-  color: #7a2bdf;
-  /* font-weight: 600; */
 `;
 
 //Header 오른쪽 메뉴
@@ -84,33 +155,6 @@ const ICON = styled.div`
   justify-content: space-around;
 `;
 
-const CusNavLink = styled(NavLink)`
-  position: relative;
-  padding: 0 0 1px 0;
-  cursor: pointer;
-  width: 0%;
-  ::before {
-    position: absolute;
-    content: "";
-    top: 0;
-    left: 0;
-    width: 0%;
-    border-top: 2px solid #7a2bdf;
-    transition: width 150ms ease-in-out;
-  }
-  ::after {
-    position: absolute;
-    content: "";
-    bottom: 0px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-top: 2px solid #7a2bdf;
-    border-bottom: 2px solid #7a2bdf;
-    transition: width 300ms ease-in-out;
-  }
-`;
-
 export function HeaderBar() {
   return (
     <>
@@ -130,7 +174,7 @@ export function HeaderBar() {
                 to="/the8"
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <The8>with THE 8</The8>
+                with THE 8
               </CusNavLink>
             </Li>
             <Li>
@@ -138,7 +182,7 @@ export function HeaderBar() {
                 to="/bestItem"
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <strong>BEST</strong>
+                BEST
               </CusNavLink>
             </Li>
             <Li>
@@ -146,7 +190,7 @@ export function HeaderBar() {
                 to="/newItem"
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <strong>New</strong>
+                New
               </CusNavLink>
             </Li>
             <Li>
@@ -154,7 +198,7 @@ export function HeaderBar() {
                 to="/shoes"
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <strong>Shoes</strong>
+                Shoes
               </CusNavLink>
             </Li>
             <Li>
@@ -162,7 +206,7 @@ export function HeaderBar() {
                 to="/acc"
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <strong>ACC</strong>
+                ACC
               </CusNavLink>
             </Li>
             <Li>
@@ -170,47 +214,56 @@ export function HeaderBar() {
                 to="/outlet"
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <strong>OUTLET</strong>
+                OUTLET
               </CusNavLink>
             </Li>
             <LiBar>|</LiBar>
             <LiSmall>
-              <CusNavLink
+              <NavLink
                 to="/benefit"
                 style={{ textDecoration: "none", color: "black" }}
               >
                 BENEFIT
-              </CusNavLink>
+              </NavLink>
             </LiSmall>
             <LiSmall>
-              <CusNavLink
+              <NavLink
                 to="/lookbook"
                 style={{ textDecoration: "none", color: "black" }}
               >
                 LOOKBOOK
-              </CusNavLink>
+              </NavLink>
             </LiSmall>
             <LiSmall>
-              <CusNavLink
+              <NavLink
                 to="/community"
                 style={{ textDecoration: "none", color: "black" }}
               >
                 COMMUNITY
-              </CusNavLink>
+              </NavLink>
             </LiSmall>
           </Ul>
         </NavMid>
-        <RUl>
-          <RLi>
-            <NavLink
-              to="/Membership"
-              style={{ textDecoration: "none", color: "grey" }}
-            >
-              멤버쉽가입
-            </NavLink>
-          </RLi>
-        </RUl>
         <RightMenu>
+          {/* 상단 */}
+          <RUl>
+            <RLi>
+              <NavLink
+                to="/login"
+                style={{ textDecoration: "none", color: "grey" }}
+              >
+                로그인
+              </NavLink>
+            </RLi>
+            <RLi>
+              <NavLink
+                to="/Membership"
+                style={{ textDecoration: "none", color: "grey" }}
+              >
+                멤버쉽가입
+              </NavLink>
+            </RLi>
+          </RUl>
           {/* 하단 */}
           <ICON>
             <a href="/search">

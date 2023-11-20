@@ -31,6 +31,18 @@ const Logintitle = styled.div`
 const Filedset = styled.fieldset`
   border: none;
   vertical-align: top;
+  display: block;
+  margin-inline-start: 2px;
+  margin-inline-end: 2px;
+  padding-block-start: 0.35em;
+  padding-inline-start: 0.75em;
+  padding-inline-end: 0.75em;
+  padding-block-end: 0.625em;
+  min-inline-size: min-content;
+  border-width: 2px;
+  /* border-style: groove; */
+  border-color: rgb(192, 192, 192);
+  border-image: initial;
 `;
 const FormBox = styled.div`
   position: relative;
@@ -150,9 +162,107 @@ const Joinbox = styled.div`
   text-align: center;
   position: relative;
 `;
-const Joinspace = styled.div``;
+const Joinspace = styled.div`
+  margin: 20px 0;
+`;
 
-const Join = styled.a``;
+const Join = styled.a`
+  display: block;
+  background: #fff;
+  color: #000;
+  border: 1px solid #d4d4d4;
+  font-size: 15px;
+  line-height: 50px;
+  border-radius: 25px;
+  letter-spacing: -1px;
+  color: #787878;
+  line-height: 21px;
+  border: none;
+  position: relative;
+  display: inline-block;
+  ::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #787878;
+  }
+`;
+
+const Orwrap = styled.div`
+  position: relative;
+  margin: 48px 0;
+  border-bottom: 1px solid #eaeaea;
+`;
+
+const Or = styled.div`
+  display: block;
+  height: 20px;
+  line-height: 20px;
+  background: #fff;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -9px;
+  font-size: 12px;
+  font-weight: 300;
+  color: #000;
+  padding: 0 10px;
+`;
+
+const SnsSync = styled.div`
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 12px;
+  max-width: 250px;
+  margin: auto;
+  margin-bottom: 100px;
+`;
+
+const KaKaologin = styled.a`
+  width: 33.3%;
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  text-decoration: none;
+  color: #000;
+  img {
+    width: 48px;
+    margin: auto;
+    display: block;
+  }
+`;
+const Naverlogin = styled.a`
+  width: 33.3%;
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  text-decoration: none;
+  color: #000;
+  img {
+    width: 48px;
+    margin: auto;
+    display: block;
+  }
+`;
+const Applelogin = styled.a`
+  width: 33.3%;
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  text-decoration: none;
+  color: #000;
+  img {
+    width: 48px;
+    margin: auto;
+    display: block;
+  }
+`;
 export function Login() {
   return (
     <>
@@ -183,12 +293,32 @@ export function Login() {
                 </Btnbox>
                 <Joinbox>
                   <Joinspace>
-                    <Join></Join>
+                    <Join>
+                      <text>일반 회원가입</text>
+                    </Join>
                   </Joinspace>
                 </Joinbox>
                 <Typelogin />
               </FormBox>
             </Filedset>
+            <Orwrap>
+              <Or>또는</Or>
+            </Orwrap>
+            <SnsSync>
+              <KaKaologin href="#none">
+                <img src="https://whoisnerdy.com/web/upload/icon/ico_kakao.png" />
+                &nbsp;
+                <span>카카오</span>
+              </KaKaologin>
+              <Naverlogin href="#none">
+                <img src="https://whoisnerdy.com/web/upload/icon/ico_naver.png" />
+                <span>네이버</span>
+              </Naverlogin>
+              <Applelogin href="#none">
+                <img src="https://whoisnerdy.com/web/upload/icon/ico_apple.png" />
+                <span>애플</span>
+              </Applelogin>
+            </SnsSync>
           </Loginbar>
         </Content>
       </Container>

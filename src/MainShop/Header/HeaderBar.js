@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
+import { SnapBody } from "../Body/SnapBody";
 
 const Container = styled.div`
   position: sticky;
@@ -9,7 +10,7 @@ const Container = styled.div`
   height: 80px;
   width: 100%;
   display: flex;
-  z-index: 1000;
+  z-index: 10;
   background-color: white;
 `;
 
@@ -43,54 +44,23 @@ const Li = styled.li`
   font-weight: 600;
   font-size: 15px;
   padding: 0 10px;
-  color: black;
-  //Li의 요소 중 첫번째 자식만 속성을 다르게 주고 싶어서 작성문 부분.
-  :nth-child(1) {
-    color: #7a2bdf;
-    &::before {
-      content: "";
-      position: absolute;
-      width: 0%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      border-top: 2px solid #7a2bdf;
-      transition: width 300ms ease-in-out;
-    }
-    &:hover::before {
-      width: 100%;
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      width: 0%;
-      height: 100%;
-      bottom: 0;
-      left: 0;
-      border-bottom: 2px solid #7a2bdf;
-      transition: width 300ms ease-in-out;
-      transition-delay: 0.2s;
-    }
-    &:hover::after {
-      width: 100%;
-    }
-  }
 `;
-//Li 의 nth 차일드 요소가 적용이 안되는 의심되는 부분
-// 이유 : <Ul>
-//          <Li>
-//            <CusNavLink>
-//            여기에 코멘트가 작성되어있음.
-//            </CusNavLink>
-//          </Li>
-//        </Ul>
-
 const CusNavLink = styled(NavLink)`
   position: relative;
   padding: 2px 0 2px 0;
   cursor: pointer;
   width: 0%;
+  text-decoration: none;
+  color: black;
+  ${Li}:first-child & {
+    color: #7a2bdf;
+    &::before {
+      border-top: 2px solid #7a2bdf;
+    }
+    &::after {
+      border-bottom: 2px solid #7a2bdf;
+    }
+  }
   &::before {
     content: "";
     position: absolute;
@@ -104,7 +74,6 @@ const CusNavLink = styled(NavLink)`
   &:hover::before {
     width: 100%;
   }
-
   &::after {
     content: "";
     position: absolute;
@@ -120,6 +89,7 @@ const CusNavLink = styled(NavLink)`
     width: 100%;
   }
 `;
+
 const LiSmall = styled.li`
   font-size: 13px;
   font-weight: 500;
@@ -170,52 +140,23 @@ export function HeaderBar() {
         <NavMid>
           <Ul>
             <Li>
-              <CusNavLink
-                to="/the8"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                with THE 8
-              </CusNavLink>
+              <CusNavLink to="/the8">with THE 8</CusNavLink>
+              <SnapBody />
             </Li>
             <Li>
-              <CusNavLink
-                to="/bestItem"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                BEST
-              </CusNavLink>
+              <CusNavLink to="/bestItem">BEST</CusNavLink>
             </Li>
             <Li>
-              <CusNavLink
-                to="/newItem"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                New
-              </CusNavLink>
+              <CusNavLink to="/newItem">New</CusNavLink>
             </Li>
             <Li>
-              <CusNavLink
-                to="/shoes"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                Shoes
-              </CusNavLink>
+              <CusNavLink to="/shoes">Shoes</CusNavLink>
             </Li>
             <Li>
-              <CusNavLink
-                to="/acc"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                ACC
-              </CusNavLink>
+              <CusNavLink to="/acc">ACC</CusNavLink>
             </Li>
             <Li>
-              <CusNavLink
-                to="/outlet"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                OUTLET
-              </CusNavLink>
+              <CusNavLink to="/outlet">OUTLET</CusNavLink>
             </Li>
             <LiBar>|</LiBar>
             <LiSmall>
@@ -250,7 +191,7 @@ export function HeaderBar() {
             <RLi>
               <NavLink
                 to="/login"
-                style={{ textDecoration: "none", color: "grey" }}
+                style={{ textDecoration: "none", color: "#999" }}
               >
                 로그인
               </NavLink>
@@ -258,7 +199,7 @@ export function HeaderBar() {
             <RLi>
               <NavLink
                 to="/Membership"
-                style={{ textDecoration: "none", color: "grey" }}
+                style={{ textDecoration: "none", color: "#999" }}
               >
                 멤버쉽가입
               </NavLink>

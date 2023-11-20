@@ -1,5 +1,17 @@
 import styled from "styled-components";
+import React, { useContext, useState, useEffect } from "react";
+import { useQuery } from "react-query";
+import { NavLink, useNavigate } from "react-router-dom";
+import * as styledComponents from "styled-components";
+import { login } from "../Api/api";
+import { NerdyContext } from "../Body/Home";
+/**
+ * @typeof {Object} CheckProps;
+ * @property {boolean} isChecked;
+ * @param {CheckProps} props;
+ */
 
+// 기본적인 틀
 const Container = styled.div`
   width: auto;
   min-width: 1000px;
@@ -9,16 +21,19 @@ const Container = styled.div`
   margin: 0 auto;
   position: relative;
 `;
+// 틀 안의 실질적인 내용이 들어가는ㄱ소
 const Content = styled.div`
   margin: 0;
   padding: 0;
   display: block;
 `;
+// 로그인바
 const Loginbar = styled.div`
   width: 390px;
   margin: 0 auto;
   display: block;
 `;
+// 로그인 제목
 const Logintitle = styled.div`
   font-size: 25px;
   color: #000;
@@ -28,6 +43,7 @@ const Logintitle = styled.div`
   letter-spacing: -0.5px;
   font-weight: 600;
 `;
+// 로그인바의 기본 속성
 const Filedset = styled.fieldset`
   border: none;
   vertical-align: top;
@@ -44,17 +60,20 @@ const Filedset = styled.fieldset`
   border-color: rgb(192, 192, 192);
   border-image: initial;
 `;
+// 아이디 비밀번호 입력창 부모
 const FormBox = styled.div`
   position: relative;
   margin: 0px 0 0;
   font-size: 14px;
   color: #424242;
 `;
+// 자식요소
 const Form = styled.div`
   margin: 0 0px 0 0;
 `;
+// 아이디 비밀번호 입력창의 문구
 const Eplaceholder = styled.label``;
-
+// 입력하는 곳
 const Input = styled.input`
   margin: 0 0 7px;
   color: #000;
@@ -72,39 +91,49 @@ const Input = styled.input`
   border-bottom: 1px solid #dedede;
   box-sizing: border-box;
 `;
-
+// 자동로그인 및 비회원주문조회나 id/pw찾기 부모
 const Findinfo = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 20px 0 25px;
 `;
-
+// 자동로그인
 const Security = styled.p`
   margin: 0;
   padding: 0;
-  /* display: block; */
+  display: flex;
   margin-block-start: 1em;
   margin-block-end: 1em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
 `;
-const Check = styled.input`
+// 자동로그인 체크
+const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
+  display: none;
+`;
+
+const CHECKED = "https://whoisnerdy.com/web/upload/img/join_checked.png";
+const UNCHECKED = "https://whoisnerdy.com/web/upload/img/join_unchecked.png";
+
+// 체크박스
+const Check = styled.div`
   border-radius: 0;
   margin: 0 6px 0 0;
   width: 15px;
   height: 15px;
   border: 0;
-  /* -webkit-appearance: none; */
-  background: url(https://whoisnerdy.com/web/upload/img/join_unchecked.png)
+  /* 클릭시 이미지 바뀌며 자동로그인 체크 */
+  background: url(${(props) => (props.isChecked ? CHECKED : UNCHECKED)})
     no-repeat;
-
   background-size: cover;
 `;
-const Membercheck = styled.label`
+// 자동 로그인 문구
+const Membercheck = styled.span`
   margin: 0;
   cursor: pointer;
 `;
+// 비회원 주문조회 및 id/pw찾기
 const Typelogin = styled.div`
   position: relative;
   padding: 0 8px 0 0;
@@ -116,32 +145,35 @@ const Typelogin = styled.div`
   margin-block-end: 1em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
-  ::before {
+`;
+// 비회원 주문조회창
+const Notmember = styled.a`
+  color: #424242;
+  font-family: "Apple SD Gothic Neo";
+  text-decoration: none;
+`;
+// id/pw찾기창
+const Findidpass = styled.a`
+  padding: 0 0 0 8px;
+  color: #424242;
+  font-family: "Apple SD Gothic Neo";
+  text-decoration: none;
+  &::before {
     display: block;
     content: "";
     position: absolute;
-    top: 4px;
+    top: 5px;
     left: 106px;
     width: 1px;
     height: 12px;
     background: #dbdbdb;
   }
 `;
-
-const Notmember = styled.a`
-  color: #424242;
-  font-family: "Apple SD Gothic Neo";
-  text-decoration: none;
-`;
-
-const Findidpass = styled.a`
-  padding: 0 0 0 8px;
-`;
-
+// 로그인 버튼
 const Btnbox = styled.div`
   padding: 10px 0 0 0;
 `;
-
+// 로그인 버튼 속성
 const Button = styled.button`
   display: block;
   background: #000;
@@ -155,17 +187,16 @@ const Button = styled.button`
   letter-spacing: -1px;
   font-weight: 500;
 `;
-
+// 회원가입 창 부모
 const Joinbox = styled.div`
-  margin: 0 0 100px;
-  margin: 0 0 50px;
   text-align: center;
   position: relative;
 `;
+// 회원가입 자식
 const Joinspace = styled.div`
   margin: 20px 0;
 `;
-
+// 회원가입 클릭
 const Join = styled.a`
   display: block;
   background: #fff;
@@ -191,13 +222,13 @@ const Join = styled.a`
     background: #787878;
   }
 `;
-
+// 또는창 부모
 const Orwrap = styled.div`
   position: relative;
   margin: 48px 0;
   border-bottom: 1px solid #eaeaea;
 `;
-
+// 또는 속성
 const Or = styled.div`
   display: block;
   height: 20px;
@@ -212,7 +243,7 @@ const Or = styled.div`
   color: #000;
   padding: 0 10px;
 `;
-
+// SNS쪽 창 부모
 const SnsSync = styled.div`
   text-align: center;
   display: flex;
@@ -223,7 +254,7 @@ const SnsSync = styled.div`
   margin: auto;
   margin-bottom: 100px;
 `;
-
+// 이미지 및 글자
 const KaKaologin = styled.a`
   width: 33.3%;
   position: relative;
@@ -242,6 +273,7 @@ const KaKaologin = styled.a`
     color: #424242;
   }
 `;
+// 이미지 및 글자
 const Naverlogin = styled.a`
   width: 33.3%;
   position: relative;
@@ -260,6 +292,7 @@ const Naverlogin = styled.a`
     color: #424242;
   }
 `;
+// 이미지 및 글자
 const Applelogin = styled.a`
   width: 33.3%;
   position: relative;
@@ -279,8 +312,66 @@ const Applelogin = styled.a`
   }
 `;
 export function Login() {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheck = () => {
+    setIsChecked(!isChecked);
+  };
+  // const [loginId, setLoginId] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [userLogin, setUserLogin] = useState("");
+  // const [loggingIn, setLoggingIn] = useState(false);
+  // const { loginState, setLoginState } = useContext();
+  // const navigate = useNavigate();
+  // const { data, isLoading, refetch } = useQuery(
+  //   "login",
+  //   () => {
+  //     if (userLogin) {
+  //       setLoggingIn(true);
+  //       return login(userLogin);
+  //     }
+  //   },
+  //   { retry: 0 }
+  // );
+
+  // useEffect(() => {
+  //   if (data && data.resultCode === "SUCCESS" && userLogin) {
+  //     console.log(data);
+  //     localStorage.setItem(
+  //       "loginState",
+  //       JSON.stringify({ id: userLogin.loginId })
+  //     );
+  //     setLoginState({ id: userLogin.loginId });
+  //     setTimeout(() => {
+  //       navigate("/Mypage");
+  //       setLoggingIn(false);
+  //     }, 1000);
+  //   } else if (data && data.resultCode === "ERROR") {
+  //     console.log(data);
+  //     navigate("/login");
+  //   }
+  // }, [data]);
+
+  // useEffect(() => {
+  //   refetch();
+  // }, [userLogin]);
+
+  // function onSubmit(e) {
+  //   e.preventDefault();
+  //   const user = {
+  //     loginId: loginId,
+  //     password: password,
+  //   };
+  //   setUserLogin(user);
+  // }
   return (
     <>
+      {/* {loggingIn ? (
+        <h1>로그인중입니다... </h1>
+      ) : loginState?.id ? (
+        <h1> 이미 로그인되어 있습니다. {loginState.id}</h1>
+      ) : (
+        <> */}
       <Container>
         <Content>
           <Loginbar>
@@ -289,14 +380,36 @@ export function Login() {
               <FormBox>
                 <Form>
                   <Eplaceholder>
-                    <Input placeholder="아이디" />
-                    <Input placeholder="비밀번호" />
+                    <Input
+                      placeholder="아이디"
+                      // id="loginId"
+                      // value={loginId}
+                      // onChange={(e) => setLoginId(e.target.value)}
+                    />
+                    <Input
+                      placeholder="비밀번호"
+                      // id="password"
+                      // value={password}
+                      // type="password"
+                      // onChange={(e) => setPassword(e.target.value)}
+                    />
                   </Eplaceholder>
                 </Form>
                 <Findinfo>
                   <Security>
-                    <Check />
-                    <Membercheck>자동 로그인</Membercheck>
+                    <HiddenCheckbox
+                      type="checkbox"
+                      checked={isChecked}
+                      onChange={handleCheck}
+                      id="checkboxId"
+                    />
+                    <Check isChecked={isChecked} onClick={handleCheck} />
+                    <Membercheck
+                      htmlFor="checkboxId"
+                      onClick={() => handleCheck()}
+                    >
+                      자동 로그인
+                    </Membercheck>
                   </Security>
                   <Typelogin>
                     <Notmember>비회원 주문조회</Notmember>
@@ -304,7 +417,7 @@ export function Login() {
                   </Typelogin>
                 </Findinfo>
                 <Btnbox>
-                  <Button>로그인 하기</Button>
+                  <Button type="submit">로그인 하기</Button>
                 </Btnbox>
                 <Joinbox>
                   <Joinspace>
@@ -342,3 +455,6 @@ export function Login() {
     </>
   );
 }
+//     </>
+//   );
+// }

@@ -49,7 +49,7 @@ const Money = styled.div`
 const GoHomeBtn = styled.div`
   width: 100%;
   height: 100%;
-  margin-top: 10px;
+  margin-top: 20px;
   button {
     width: 90%;
     height: 16%;
@@ -61,12 +61,12 @@ const GoHomeBtn = styled.div`
 const GoLoginBtn = styled.div`
   width: 78%;
   height: 100%;
-  margin-top: 10px;
+  padding: 20px 0 0 0;
+  border-top: 1px solid #dbdbdb;
   button {
     width: 90%;
     height: 16%;
     background-color: black;
-    border: 1px solid #dbdbdb;
     color: white;
     font-weight: 900;
     font-size: 16px;
@@ -76,7 +76,10 @@ const ItemBox = styled.div`
   height: 155px;
   /* 변경예정 */
 `;
-
+const EmptyBox = styled.div`
+  width: 100%;
+  height: 20px;
+`;
 export function Cart() {
   const [itemPrices, setItemPrices] = useState([10000, 20000, 30000]); // 예시 데이터
 
@@ -100,6 +103,7 @@ export function Cart() {
               ))}
             </ItemBox>
             <Bar />
+            <EmptyBox />
             <GoHomeBtn>
               <NavLink
                 to="/bestitem"
@@ -112,7 +116,6 @@ export function Cart() {
             {itemPrices.map((price, index) => (
               <div key={index}>{/* 여기에 각 아이템의 정보 표시 */}</div>
             ))}
-            <Bar />
           </CartTextBox>
           <PayBox>
             <Bar2 />

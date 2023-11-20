@@ -32,11 +32,11 @@ export function Right() {
       <StyledDiv>
         <Link to="/newItem">
           <img src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/c58259f3fc789b832fcfcd4d7ec8995f.jpg" />
+          <TextDiv>
+            <Text1>NEW COLLECTION</Text1>
+            <Text2>보러가기 〉</Text2>
+          </TextDiv>
         </Link>
-        <TextDiv>
-          <Text1>NEW COLLECTION</Text1>
-          <Text2>보러가기 〉</Text2>
-        </TextDiv>
       </StyledDiv>
     </>
   );

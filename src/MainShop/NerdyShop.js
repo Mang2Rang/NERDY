@@ -10,11 +10,7 @@ import { Search } from "./Header/Search";
 import { Item } from "./Body/Item";
 import { Layout } from "./Layout";
 import { Shoes } from "./Header/Shoes";
-<<<<<<< HEAD
 import { Gift } from "./Header/Gift";
-=======
-
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
 import { Acc } from "./Header/Acc";
 import { NewItem } from "./Header/NewItem";
 import { BestItem } from "./Header/BestItem";

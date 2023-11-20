@@ -1,11 +1,8 @@
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const Container = styled.div`
   position: sticky;
-
-
   top: 0;
   left: 0;
   right: 0;
@@ -35,18 +32,16 @@ const NavMid = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-
-
 `;
 const Ul = styled.ul`
   display: flex;
   list-style: none;
+`;
 
 const Li = styled.li`
   font-weight: 500;
   font-size: 15px;
   padding: 0 10px;
-
   gap: 1.5rem;
 `;
 const LiSmall = styled.li`
@@ -114,8 +109,6 @@ const CusNavLink = styled(NavLink)`
     border-bottom: 2px solid #7a2bdf;
     transition: width 300ms ease-in-out;
   }
-  :hover {
-  }
 `;
 
 export function HeaderBar() {
@@ -133,7 +126,6 @@ export function HeaderBar() {
         <NavMid>
           <Ul>
             <Li>
-<<<<<<< HEAD
               <CusNavLink
                 to="/the8"
                 style={{ textDecoration: "none", color: "black" }}
@@ -143,160 +135,82 @@ export function HeaderBar() {
             </Li>
             <Li>
               <CusNavLink
-=======
-              <NavLink
-                to="/the8"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <strong>with THE 8</strong>
-              </NavLink>
-            </Li>
-            <Li>
-              <NavLink
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
                 to="/bestItem"
                 style={{ textDecoration: "none", color: "black" }}
               >
                 <strong>BEST</strong>
-<<<<<<< HEAD
               </CusNavLink>
             </Li>
             <Li>
               <CusNavLink
-=======
-              </NavLink>
-            </Li>
-            <Li>
-              <NavLink
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
                 to="/newItem"
                 style={{ textDecoration: "none", color: "black" }}
               >
                 <strong>New</strong>
-<<<<<<< HEAD
               </CusNavLink>
             </Li>
             <Li>
               <CusNavLink
-=======
-              </NavLink>
-            </Li>
-            <Li>
-              <NavLink
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
                 to="/shoes"
                 style={{ textDecoration: "none", color: "black" }}
               >
                 <strong>Shoes</strong>
-<<<<<<< HEAD
               </CusNavLink>
             </Li>
             <Li>
               <CusNavLink
-=======
-              </NavLink>
-            </Li>
-            <Li>
-              <NavLink
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
                 to="/acc"
                 style={{ textDecoration: "none", color: "black" }}
               >
                 <strong>ACC</strong>
-<<<<<<< HEAD
               </CusNavLink>
             </Li>
             <Li>
               <CusNavLink
-=======
-              </NavLink>
-            </Li>
-            <Li>
-              <NavLink
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
                 to="/outlet"
                 style={{ textDecoration: "none", color: "black" }}
               >
                 <strong>OUTLET</strong>
-<<<<<<< HEAD
               </CusNavLink>
             </Li>
             <LiBar>|</LiBar>
             <LiSmall>
               <CusNavLink
-=======
-              </NavLink>
-            </Li>
-            <LiBar>|</LiBar>
-            <LiSmall>
-              <NavLink
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
                 to="/benefit"
                 style={{ textDecoration: "none", color: "black" }}
               >
                 BENEFIT
-<<<<<<< HEAD
               </CusNavLink>
             </LiSmall>
             <LiSmall>
               <CusNavLink
-=======
-              </NavLink>
-            </LiSmall>
-            <LiSmall>
-              <NavLink
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
                 to="/lookbook"
                 style={{ textDecoration: "none", color: "black" }}
               >
                 LOOKBOOK
-<<<<<<< HEAD
               </CusNavLink>
             </LiSmall>
             <LiSmall>
               <CusNavLink
-=======
-              </NavLink>
-            </LiSmall>
-            <LiSmall>
-              <NavLink
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
                 to="/community"
                 style={{ textDecoration: "none", color: "black" }}
               >
                 COMMUNITY
-<<<<<<< HEAD
               </CusNavLink>
-=======
-              </NavLink>
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
             </LiSmall>
           </Ul>
         </NavMid>
+        <RUl>
+          <RLi>
+            <NavLink
+              to="/Membership"
+              style={{ textDecoration: "none", color: "grey" }}
+            >
+              멤버쉽가입
+            </NavLink>
+          </RLi>
+        </RUl>
         <RightMenu>
-          {/* 상단 */}
-          <RUl>
-            <RLi>
-              <NavLink
-                to="/login"
-                style={{ textDecoration: "none", color: "grey" }}
-              >
-                로그인
-              </NavLink>
-            </RLi>
-<<<<<<< HEAD
-            <RLi>
-              <NavLink
-                to="/Membership"
-                style={{ textDecoration: "none", color: "grey" }}
-              >
-                멤버쉽가입
-              </NavLink>
-            </RLi>
-=======
-            <RLi>멤버쉽가입</RLi>
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
-          </RUl>
           {/* 하단 */}
           <ICON>
             <a href="/search">
@@ -320,10 +234,6 @@ export function HeaderBar() {
           </ICON>
         </RightMenu>
       </Container>
-<<<<<<< HEAD
-=======
-      <HeaderSpacer />
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
     </>
   );
 }

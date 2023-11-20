@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-<<<<<<< HEAD
 import { useRef, useEffect } from "react";
-=======
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
 
 const Chat = styled.div`
   position: fixed;
@@ -19,10 +16,7 @@ const Chat = styled.div`
 `;
 const Top = styled.div`
   position: fixed;
-<<<<<<< HEAD
   display: none;
-=======
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
   width: 64px;
   height: 64px;
   right: 40px;
@@ -39,7 +33,6 @@ const Top = styled.div`
     border: none;
   }
 `;
-<<<<<<< HEAD
 
 const topElement = document.querySelector(Top); // Top 요소를 JavaScript에서 사용할 수 있도록 선택
 
@@ -71,26 +64,17 @@ export function Kakao() {
     };
   }, []);
 
-=======
-export function Kakao() {
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
   const handleTopClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   return (
     <>
-<<<<<<< HEAD
       <Top onClick={handleTopClick} id="Top_Icon" ref={topRef}>
         <a id="goto_top">
           <img
             src="https://whoisnerdy.com/web/upload/images/ico_go_top.png"
             alt="Top"
           />
-=======
-      <Top onClick={handleTopClick}>
-        <a id="goto_top">
-          <img src="https://whoisnerdy.com/web/upload/images/ico_go_top.png" />
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
         </a>
       </Top>
       <Chat>

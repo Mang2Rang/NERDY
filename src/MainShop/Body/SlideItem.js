@@ -7,11 +7,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-<<<<<<< HEAD
 // import "../Style/SlideItem_styles.css";
-=======
-import "../Style/SlideItem_styles.css";
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
 
 // import required modules
 import { Autoplay, Navigation, FreeMode } from "swiper/modules";
@@ -47,14 +43,8 @@ export function SlideItem() {
         </Notice>
         <Swiper
           slidesPerView={5}
-<<<<<<< HEAD
           spaceBetween={0.1}
           centeredSlides={true}
-=======
-          spaceBetween={10}
-          centeredSlides={true}
-          loop={true}
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
           speed={1500}
           autoplay={{
             delay: 0,
@@ -62,7 +52,6 @@ export function SlideItem() {
           }}
           navigation={false}
           modules={[FreeMode, Autoplay, Navigation]}
-<<<<<<< HEAD
           loop={true}
           //마우스 드래그 시 발생하는 빈공간 해결 구문
           freeMode={true}
@@ -71,84 +60,52 @@ export function SlideItem() {
           freeModeMomentumVelocityRatio={0.1}
           freeModeMinimumVelocity={0.1}
           id="SlideItem_Swiper"
-=======
-          className="SlideItem_Swiper"
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
         >
           <SwiperSlide>
             <img
               src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/1af16c22d07550f24445277c1635e1c3.jpg"
-<<<<<<< HEAD
               alt="0"
-=======
-              alt=""
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/1fa0ee4d773bb80f3a765c8d309172a1.jpg"
-<<<<<<< HEAD
               alt="1"
-=======
-              alt=""
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/9e8e093b72984389873f96ea4d04c235.jpg"
-<<<<<<< HEAD
               alt="2"
-=======
-              alt=""
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/48bceadda820a2461427d4974c656a8d.jpg"
-<<<<<<< HEAD
               alt="3"
-=======
-              alt=""
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/83bdb9e9b92e4c09a2eb3e53568d6bec.jpg"
-<<<<<<< HEAD
               alt="4"
-=======
-              alt=""
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/59ad7fb98d31095b5c4b72c06f1c78e7.jpg"
-<<<<<<< HEAD
               alt="5"
-=======
-              alt=""
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/633c35e3e9d350a4d9b5bd896b773286.jpg"
-<<<<<<< HEAD
               alt="6"
-=======
-              alt=""
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/35b27d65d165ee989ca8f720585cb44a.jpg"
-<<<<<<< HEAD
               alt="7"
             />
           </SwiperSlide>
@@ -186,9 +143,6 @@ export function SlideItem() {
             <img
               src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/64155579b88b578a81514773b00c343f.jpg"
               alt="13"
-=======
-              alt=""
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
             />
           </SwiperSlide>
         </Swiper>

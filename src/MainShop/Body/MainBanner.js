@@ -1,9 +1,6 @@
 import styled from "styled-components";
-<<<<<<< HEAD
 import React, { useRef, useEffect } from "react";
-=======
-import React, { useRef, useState } from "react";
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -18,7 +15,7 @@ const Banner = styled.img`
   height: 100%;
   z-index: -1;
 `;
-<<<<<<< HEAD
+
 //커스텀 Swiper 작성 부분
 const MainBannerSwiper = styled(Swiper)`
   position: relative;
@@ -33,10 +30,6 @@ const MainBannerSwiper = styled(Swiper)`
 `;
 
 const TxtdivWrapper = styled.div`
-=======
-
-export const TxtdivWrapper = styled.div`
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -76,28 +69,18 @@ const Txtdiv3 = styled.div`
 export function MainBanner() {
   return (
     <>
-<<<<<<< HEAD
       <MainBannerSwiper
         scrollbar={true}
         modules={[Scrollbar]}
         className="swiper-container-1"
-=======
-      <Swiper
-        scrollbar={true}
-        modules={[Scrollbar]}
-        className="MainBanner_Swiper"
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
       >
         <SwiperSlide>
           <Banner
             src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/04e7f7ca1797c81236959ab9395b1552.jpg"
             alt="Main Banner"
           />
-<<<<<<< HEAD
+
           <TxtdivWrapper>
-=======
-          <TxtdivWrapper id="TxtdivWrapper">
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
             <Txtdiv1>11.10 - 11.26</Txtdiv1>
             <Txtdiv2>PURPLE FRIDAY</Txtdiv2>
             <Txtdiv3>1년에 단 한번! 역대급 할인 혜택</Txtdiv3>
@@ -108,7 +91,7 @@ export function MainBanner() {
             src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/f85c783fe46b384389d73b0bb2e04784.jpg"
             alt="Main Banner"
           />
-<<<<<<< HEAD
+
           <TxtdivWrapper>
             <Txtdiv1>23FW</Txtdiv1>
             <Txtdiv2>RISE ANEW, NERDY</Txtdiv2>
@@ -116,15 +99,6 @@ export function MainBanner() {
           </TxtdivWrapper>
         </SwiperSlide>
       </MainBannerSwiper>
-=======
-          <txtWrap>
-            <div>23FW</div>
-            <div>RISE ANEW, NERDY</div>
-            <div>세븐틴 THE 8과 함께한 23F/W 컬렉션</div>
-          </txtWrap>
-        </SwiperSlide>
-      </Swiper>
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
     </>
   );
 }

@@ -1,17 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-<<<<<<< HEAD
 import { NavLink } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
   height: 600px;
-=======
-
-const Container = styled.div`
-  width: 100%;
-  height: 1000px;
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
 `;
 const CartBox = styled.div`
   display: grid;
@@ -52,7 +45,7 @@ const Money = styled.div`
     margin-bottom: 10px;
   }
 `;
-<<<<<<< HEAD
+
 const GoHomeBtn = styled.div`
   width: 100%;
   height: 100%;
@@ -83,9 +76,7 @@ const ItemBox = styled.div`
   height: 155px;
   /* 변경예정 */
 `;
-=======
 
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
 export function Cart() {
   const [itemPrices, setItemPrices] = useState([10000, 20000, 30000]); // 예시 데이터
 
@@ -101,7 +92,6 @@ export function Cart() {
         <CartBox>
           <CartTextBox>
             <h2>장바구니</h2>
-<<<<<<< HEAD
             <Bar />
             <ItemBox>
               {/* <Item/> */}
@@ -118,13 +108,11 @@ export function Cart() {
                 <button>+ 더 담으러 가기</button>
               </NavLink>
             </GoHomeBtn>
-=======
             {/* <Item/> */}
             {itemPrices.map((price, index) => (
               <div key={index}>{/* 여기에 각 아이템의 정보 표시 */}</div>
             ))}
             <Bar />
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
           </CartTextBox>
           <PayBox>
             <Bar2 />
@@ -150,7 +138,6 @@ export function Cart() {
                 <h4>{totalPayment}원</h4>
               </Money>
             </Pay>
-<<<<<<< HEAD
             <GoLoginBtn>
               <NavLink
                 to="/login"
@@ -159,8 +146,6 @@ export function Cart() {
                 <button>결제하기</button>
               </NavLink>
             </GoLoginBtn>
-=======
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
           </PayBox>
         </CartBox>
       </Container>

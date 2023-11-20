@@ -12,7 +12,11 @@ const BestItemBanner = styled.div`
   margin-bottom: 50px;
   img {
     width: 100%;
+<<<<<<< HEAD
     height: 400px;
+=======
+    height: 100%;
+>>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
     object-fit: cover;
   }
 `;
@@ -29,6 +33,7 @@ const ItemText = styled.div`
   }
 `;
 const Thumbnail = styled.div`
+<<<<<<< HEAD
   position: relative;
   width: 244px;
   margin-top: 30px;
@@ -41,15 +46,30 @@ const BestNum = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+=======
+  margin-top: 30px;
+  img {
+    width: 100%;
+    height: 400px;
+  }
+`;
+const BestNum = styled.div`
+>>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
   width: 40px;
   height: 35px;
   background-color: black;
   color: white;
   font-size: 12px;
   font-weight: 900;
+<<<<<<< HEAD
   align-items: center;
   flex-direction: column;
   text-align: center;
+=======
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+>>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
 `;
 const Li = styled.div``;
 const ItemIf = styled.div`
@@ -80,6 +100,7 @@ const ItemTitle = styled.div`
 export function NewItem() {
   const productList = [
     /* 리스트에 상품 정보를 추가하세요 */
+<<<<<<< HEAD
     {
       imageUrl:
         "https://www.whoisnerdy.com/web/product/big/202307/8133f567f6daca77d0eb9e5c0ba5b1e3.png",
@@ -87,6 +108,8 @@ export function NewItem() {
       salePercentage: "20%",
       link: "",
     },
+=======
+>>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
   ];
   return (
     <>
@@ -96,7 +119,14 @@ export function NewItem() {
           <strong>전체</strong>
         </ItemTitle>
         <BestItemBanner>
+<<<<<<< HEAD
           <img src="https://www.whoisnerdy.com/web/upload/event/2023/editorial_01.png?ver=2" />
+=======
+          <img
+            src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/d6f312b3dac67073bda4b0018a47c320.jpg"
+            alt="배너"
+          />
+>>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
         </BestItemBanner>
         <ItemText>
           <p>{productList.length}개의 상품이 있습니다</p>

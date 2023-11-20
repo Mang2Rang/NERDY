@@ -84,8 +84,12 @@ const Check = styled.input`
   height: 15px;
   border: 0;
   /* -webkit-appearance: none; */
+<<<<<<< HEAD
   background: url(https://whoisnerdy.com/web/upload/img/join_unchecked.png)
     no-repeat;
+=======
+  background: url() no-repeat;
+>>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
   background-size: cover;
 `;
 const Membercheck = styled.label`
@@ -93,6 +97,7 @@ const Membercheck = styled.label`
   cursor: pointer;
 `;
 const Typelogin = styled.div`
+<<<<<<< HEAD
   position: relative;
   padding: 0 8px 0 0;
   display: inline-block;
@@ -113,6 +118,10 @@ const Typelogin = styled.div`
     height: 12px;
     background: #dbdbdb;
   }
+=======
+  font-size: 14px;
+  color: #424242;
+>>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
 `;
 
 const Notmember = styled.a`
@@ -121,6 +130,7 @@ const Notmember = styled.a`
   text-decoration: none;
 `;
 
+<<<<<<< HEAD
 const Findidpass = styled.a`
   padding: 0 0 0 8px;
 `;
@@ -152,6 +162,8 @@ const Joinbox = styled.div`
 const Joinspace = styled.div``;
 
 const Join = styled.a``;
+=======
+>>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
 export function Login() {
   return (
     <>
@@ -174,6 +186,7 @@ export function Login() {
                   </Security>
                   <Typelogin>
                     <Notmember>비회원 주문조회</Notmember>
+<<<<<<< HEAD
                     <Findidpass>ID/PW찾기</Findidpass>
                   </Typelogin>
                 </Findinfo>
@@ -185,6 +198,10 @@ export function Login() {
                     <Join></Join>
                   </Joinspace>
                 </Joinbox>
+=======
+                  </Typelogin>
+                </Findinfo>
+>>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
               </FormBox>
             </Filedset>
           </Loginbar>

@@ -1,6 +1,14 @@
 import { QueryClient, QueryClientProvider } from "react-query";
+<<<<<<< HEAD
 import { createGlobalStyle } from "styled-components";
 import { NerdyShop } from "./MainShop/NerdyShop";
+=======
+import { Home } from "./MainShop/Body/Home";
+import { createGlobalStyle } from "styled-components";
+import { BestItem } from "./MainShop/Header/BestItem";
+import { NerdyShop } from "./MainShop/NerdyShop";
+import { Item } from "./MainShop/Body/Item";
+>>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
 
 const GlobalStyle = createGlobalStyle`
 @font-face {
@@ -12,8 +20,12 @@ const GlobalStyle = createGlobalStyle`
   * {
     margin : 0;
     padding : 0;
+<<<<<<< HEAD
     box-sizing: border-box;
     font-family: Pretendard-Regular;
+=======
+    box-sizing: border-box;    
+>>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
   }
 `;
 

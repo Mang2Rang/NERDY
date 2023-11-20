@@ -4,7 +4,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { MainBanner } from "./MainBanner";
 import { SlideItem } from "./SlideItem";
+<<<<<<< HEAD
 import { SlideFooterBar } from "../Footer/SlideFooterBar";
+=======
+>>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
 
 const Container = styled.div`
   width: calc(100%);

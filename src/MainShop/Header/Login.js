@@ -236,6 +236,11 @@ const KaKaologin = styled.a`
     margin: auto;
     display: block;
   }
+  span {
+    font-size: 14px;
+    display: block;
+    color: #424242;
+  }
 `;
 const Naverlogin = styled.a`
   width: 33.3%;
@@ -249,6 +254,11 @@ const Naverlogin = styled.a`
     margin: auto;
     display: block;
   }
+  span {
+    font-size: 14px;
+    display: block;
+    color: #424242;
+  }
 `;
 const Applelogin = styled.a`
   width: 33.3%;
@@ -261,6 +271,11 @@ const Applelogin = styled.a`
     width: 48px;
     margin: auto;
     display: block;
+  }
+  span {
+    font-size: 14px;
+    display: block;
+    color: #424242;
   }
 `;
 export function Login() {
@@ -312,10 +327,12 @@ export function Login() {
               </KaKaologin>
               <Naverlogin href="#none">
                 <img src="https://whoisnerdy.com/web/upload/icon/ico_naver.png" />
+                &nbsp;
                 <span>네이버</span>
               </Naverlogin>
               <Applelogin href="#none">
                 <img src="https://whoisnerdy.com/web/upload/icon/ico_apple.png" />
+                &nbsp;
                 <span>애플</span>
               </Applelogin>
             </SnsSync>

@@ -3,11 +3,9 @@ import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
-<<<<<<< HEAD
   position: sticky;
-=======
-  position: fixed;
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
+
+
   top: 0;
   left: 0;
   right: 0;
@@ -36,28 +34,20 @@ const NavMid = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-<<<<<<< HEAD
   text-align: center;
-=======
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
+
+
 `;
 const Ul = styled.ul`
   display: flex;
   list-style: none;
-<<<<<<< HEAD
-  gap: 1rem;
-`;
+
 const Li = styled.li`
   font-weight: 500;
   font-size: 15px;
   padding: 0 10px;
-=======
+
   gap: 1.5rem;
-`;
-const Li = styled.li`
-  font-weight: bold;
-  font-size: 15px;
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
 `;
 const LiSmall = styled.li`
   font-size: 13px;
@@ -67,13 +57,11 @@ const LiBar = styled.li`
   color: #eaeaea;
 `;
 
-<<<<<<< HEAD
 const The8 = styled.div`
   color: #7a2bdf;
   /* font-weight: 600; */
 `;
-=======
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
+
 //Header 오른쪽 메뉴
 const RightMenu = styled.div`
   position: absolute;
@@ -100,7 +88,7 @@ const ICON = styled.div`
   display: flex;
   justify-content: space-around;
 `;
-<<<<<<< HEAD
+
 const CusNavLink = styled(NavLink)`
   position: relative;
   padding: 0 0 1px 0;
@@ -129,15 +117,6 @@ const CusNavLink = styled(NavLink)`
   :hover {
   }
 `;
-=======
-const HeaderSpacer = styled.div`
-  height: 80px;
-`;
-// const NavLink = styled.a`
-//   text-decoration: none;
-//   color: black;
-// `;
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
 
 export function HeaderBar() {
   return (

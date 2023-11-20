@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
@@ -127,12 +126,6 @@ export function Mypage() {
           <OrderTable>주문내역/이미지 들어올 테이블</OrderTable>
         </OrderBox>
       </Container>
-=======
-export function Mypage() {
-  return (
-    <>
-      <h2>Mypage</h2>
->>>>>>> 28c6aaf949b747dc229a435948e802044af9e084
     </>
   );
 }

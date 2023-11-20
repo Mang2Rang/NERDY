@@ -2,24 +2,25 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
 const Container = styled.div`
-  width: 100%;
+  width: 1000px;
   height: 1000px;
+  margin: 0 auto;
 `;
 const MypageBox = styled.div`
   position: relative;
-  width: 80%;
+  width: 1000px;
   height: 25%;
   border: 1px solid #e0e0e0;
-  margin: 0 auto;
   margin-top: 30px;
   margin-bottom: 50px;
-  padding: 30px 0px 30px 50px;
+  /* padding: 30px 0px 30px 50px; */
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 const Level = styled.div`
-  width: 50%;
+  width: 40%;
+  margin-left: 40px;
   p {
     margin-bottom: 10px;
   }

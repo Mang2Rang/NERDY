@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./Body/Home";
 import { Error } from "./Body/Error";
 import { Login } from "./Header/Login";
+import { Register } from "./Header/Register";
 import { Cart } from "./Header/Cart";
 import { Mypage } from "./Header/Mypage";
 import { Search } from "./Header/Search";
@@ -25,6 +26,7 @@ import { EarlyLb } from "./Header/LookbookPage/EarlyLb";
 import { BlenkLb } from "./Header/LookbookPage/BlenkLb";
 import { TennisLb } from "./Header/LookbookPage/TennisLb";
 import { DisneyLb } from "./Header/LookbookPage/DisneyLb";
+
 // 글로벌 세팅 구현
 
 const client = new QueryClient();
@@ -58,6 +60,7 @@ export function NerdyShop() {
                 <Route path="community" element={<Community />} />
                 <Route path="search" element={<Search />} />
                 <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
                 <Route path="cart" element={<Cart />} />
                 <Route path="gift" element={<Gift />} />
                 <Route path="member" element={<Mypage />} />

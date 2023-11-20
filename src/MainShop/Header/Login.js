@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import React, { useContext, useState, useEffect } from "react";
-import { useQuery } from "react-query";
-import { NavLink, useNavigate } from "react-router-dom";
-import * as styledComponents from "styled-components";
-import { login } from "../Api/api";
-import { NerdyContext } from "../Body/Home";
+import React, { useState } from "react";
+// import React, { useContext, useState, useEffect } from "react";
+// import { useQuery } from "react-query";
+// import { NavLink, useNavigate } from "react-router-dom";
+// import * as styledComponents from "styled-components";
+// import { login } from "../Api/api";
+// import { NerdyContext } from "../Body/Home";
 /**
  * @typeof {Object} CheckProps;
  * @property {boolean} isChecked;
@@ -46,7 +47,6 @@ const Logintitle = styled.div`
 // 로그인바의 기본 속성
 const Filedset = styled.fieldset`
   border: none;
-  vertical-align: top;
   display: block;
   margin-inline-start: 2px;
   margin-inline-end: 2px;
@@ -198,6 +198,7 @@ const Joinspace = styled.div`
 `;
 // 회원가입 클릭
 const Join = styled.a`
+  text-decoration: none;
   display: block;
   background: #fff;
   color: #000;
@@ -421,7 +422,7 @@ export function Login() {
                 </Btnbox>
                 <Joinbox>
                   <Joinspace>
-                    <Join>
+                    <Join href="/register">
                       <text>일반 회원가입</text>
                     </Join>
                   </Joinspace>

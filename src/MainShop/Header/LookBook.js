@@ -128,7 +128,10 @@ export function LookBook() {
               to="/the8lb"
               style={{ textDecoration: "none", color: "black" }}
             >
-              <img src="https://whoisnerdy.com/file_data/multinex//2023/11/08/cd13caff572da93318bf9fd7cb844f99.jpg" />
+              <img
+                src="https://whoisnerdy.com/file_data/multinex//2023/11/08/cd13caff572da93318bf9fd7cb844f99.jpg"
+                alt=""
+              />
             </NavLink>
             <h3>NERDY with THE 8 LOOKBOOK</h3>
             <p>2023.11.01~</p>
@@ -138,7 +141,10 @@ export function LookBook() {
               to="/seasonlb"
               style={{ textDecoration: "none", color: "black" }}
             >
-              <img src="https://whoisnerdy.com/file_data/multinex//2023/09/25/e3abb77fa6f0bdd0269e043cd1d90ff9.jpg" />
+              <img
+                src="https://whoisnerdy.com/file_data/multinex//2023/09/25/e3abb77fa6f0bdd0269e043cd1d90ff9.jpg"
+                alt=""
+              />
             </NavLink>
             <h3>23FW SEASON LOOKBOOK</h3>
             <p>2023.09.01~</p>
@@ -148,7 +154,10 @@ export function LookBook() {
               to="/earlylb"
               style={{ textDecoration: "none", color: "black" }}
             >
-              <img src="https://whoisnerdy.com/file_data/multinex//2023/09/12/3db4ecf25869c34233f368085cfe2250.jpg" />
+              <img
+                src="https://whoisnerdy.com/file_data/multinex//2023/09/12/3db4ecf25869c34233f368085cfe2250.jpg"
+                alt=""
+              />
             </NavLink>
             <h3>23FW EARLY BIRD</h3>
             <p>2023.08.29~</p>
@@ -160,7 +169,10 @@ export function LookBook() {
               to="/blenklb"
               style={{ textDecoration: "none", color: "black" }}
             >
-              <img src="https://whoisnerdy.com/file_data/multinex//2023/04/28/7984939c370cc326fff0adc7bcb2dc5b.jpg" />
+              <img
+                src="https://whoisnerdy.com/file_data/multinex//2023/04/28/7984939c370cc326fff0adc7bcb2dc5b.jpg"
+                alt=""
+              />
             </NavLink>
             <h3>BL'E'NK COLLECTION Vol.02</h3>
             <p>2023.04.27~</p>
@@ -170,7 +182,10 @@ export function LookBook() {
               to="/tennislb"
               style={{ textDecoration: "none", color: "black" }}
             >
-              <img src="https://whoisnerdy.com/file_data/multinex//2023/03/30/4bf951ddeb61a1c1075be31cc8c2f066.jpg" />
+              <img
+                src="https://whoisnerdy.com/file_data/multinex//2023/03/30/4bf951ddeb61a1c1075be31cc8c2f066.jpg"
+                alt=""
+              />
             </NavLink>
             <h3>NERDY TENNIS LOOK</h3>
             <p>2023.03.30~</p>
@@ -180,7 +195,10 @@ export function LookBook() {
               to="/disneylb"
               style={{ textDecoration: "none", color: "black" }}
             >
-              <img src="https://whoisnerdy.com/file_data/multinex//2023/03/27/a4861a9c8031617022b2471c7c49f399.jpg" />
+              <img
+                src="https://whoisnerdy.com/file_data/multinex//2023/03/27/a4861a9c8031617022b2471c7c49f399.jpg"
+                alt=""
+              />
             </NavLink>
             <h3>DISNEY 2ND COLLECTION</h3>
             <p>2023.11.01~</p>
@@ -191,7 +209,10 @@ export function LookBook() {
             <Ftext>종료</Ftext>
             <Fbox>
               <Fog />
-              <img src="https://whoisnerdy.com/file_data/multinex//2022/11/29/9de960b12471f2c9f27a91cd6145ae95.jpg" />
+              <img
+                src="https://whoisnerdy.com/file_data/multinex//2022/11/29/9de960b12471f2c9f27a91cd6145ae95.jpg"
+                alt=""
+              />
             </Fbox>
             <h3>CAMPING IN THE WINTER</h3>
             <p>2022.11.28~2022.12.31</p>
@@ -200,7 +221,10 @@ export function LookBook() {
             <Ftext>종료</Ftext>
             <Fbox>
               <Fog />
-              <img src="https://whoisnerdy.com/file_data/multinex//2022/10/06/9540f0d073ca1e23f958cc2c2fcd6728.jpg" />
+              <img
+                src="https://whoisnerdy.com/file_data/multinex//2022/10/06/9540f0d073ca1e23f958cc2c2fcd6728.jpg"
+                alt=""
+              />
             </Fbox>
             <h3>22FW TAEYEON 2ND COLLECTION</h3>
             <p>2022.10.06~2022.12.31</p>
@@ -209,7 +233,10 @@ export function LookBook() {
             <Ftext>종료</Ftext>
             <Fbox>
               <Fog />
-              <img src="https://whoisnerdy.com/file_data/multinex//2022/10/06/2be073b16fa2a3f4549993b8d7269f03.jpg" />
+              <img
+                src="https://whoisnerdy.com/file_data/multinex//2022/10/06/2be073b16fa2a3f4549993b8d7269f03.jpg"
+                alt=""
+              />
             </Fbox>
             <h3>NERDY x YONSEI UNIVERSITY</h3>
             <p>2022.09.23~2022.12.31</p>
@@ -220,16 +247,22 @@ export function LookBook() {
             <Ftext>종료</Ftext>
             <Fbox>
               <Fog />
-              <img src="https://whoisnerdy.com/file_data/multinex//2022/08/31/e106a3fb33e0f30d72ce5e699ed8a6b1.jpg" />
+              <img
+                src="https://whoisnerdy.com/file_data/multinex//2022/08/31/e106a3fb33e0f30d72ce5e699ed8a6b1.jpg"
+                alt=""
+              />
             </Fbox>
-            <h3>CHYNDAI DEPARTMENT STORE DUTY FREE...</h3>
+            <h3>HYNDAI DEPARTMENT STO...</h3>
             <p>2022.08.31~2022.12.31</p>
           </LookbookBox2>
           <LookbookBox2>
             <Ftext>종료</Ftext>
             <Fbox>
               <Fog />
-              <img src="https://whoisnerdy.com/file_data/multinex//2022/08/16/b2afd74acf2d9752818bb166bc789c2c.jpg" />
+              <img
+                src="https://whoisnerdy.com/file_data/multinex//2022/08/16/b2afd74acf2d9752818bb166bc789c2c.jpg"
+                alt=""
+              />
             </Fbox>
             <h3>22FW TAEYEON 1ST COLLECTION</h3>
             <p>2022.08.16~2022.12.31</p>
@@ -238,7 +271,10 @@ export function LookBook() {
             <Ftext>종료</Ftext>
             <Fbox>
               <Fog />
-              <img src="https://whoisnerdy.com/file_data/multinex//2022/06/02/6bb8d93c826c0339fcbfb24e6cf69be3.jpg" />
+              <img
+                src="https://whoisnerdy.com/file_data/multinex//2022/06/02/6bb8d93c826c0339fcbfb24e6cf69be3.jpg"
+                alt=""
+              />
             </Fbox>
             <h3>DERDIST ADORA</h3>
             <p>2022.06.02~2022.12.31</p>

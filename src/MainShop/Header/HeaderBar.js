@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 import { SnapBody } from "../Body/SnapBody";
+import { useState, useRef, useEffect } from "react";
 
 const Container = styled.div`
   position: sticky;
@@ -126,6 +127,10 @@ const ICON = styled.div`
 `;
 
 export function HeaderBar() {
+  const SnapBodyRef = useRef(null);
+  const [opacity, setOpacity] = useState(0);
+  const [height, setHeight] = useState(0);
+  useEffect(() => {}, []);
   return (
     <>
       <Container>
@@ -141,7 +146,7 @@ export function HeaderBar() {
           <Ul>
             <Li>
               <CusNavLink to="/the8">with THE 8</CusNavLink>
-              <SnapBody />
+              <SnapBody opacity={opacity === 1} height={height} />
             </Li>
             <Li>
               <CusNavLink to="/bestItem">BEST</CusNavLink>

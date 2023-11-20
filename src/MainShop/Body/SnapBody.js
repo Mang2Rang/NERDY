@@ -12,8 +12,9 @@ const Container = styled.div`
   background-color: #ffffff;
   overflow: hidden;
   //아래 2개의 값으로 메뉴 on&off Control
+  max-height: ${(props) => props.height};
   max-height: 0;
-  opacity: 0;
+  opacity: ${(props) => (props.active ? 1 : 0)};
   transition: all 0.2s ease-in-out;
 `;
 const SubBody = styled.div`
@@ -53,10 +54,10 @@ const Img = styled.img`
   width: 100%;
 `;
 
-export function SnapBody() {
+export function SnapBody(opacity, height) {
   return (
     <>
-      <Container>
+      <Container opacity={opacity} height={height}>
         <SubBody>
           <NavBody>
             <CusNavLink to="/the8">

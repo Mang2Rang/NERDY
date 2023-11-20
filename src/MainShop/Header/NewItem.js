@@ -104,7 +104,10 @@ export function NewItem() {
           <strong>전체</strong>
         </ItemTitle>
         <BestItemBanner>
-          <img src="https://www.whoisnerdy.com/web/upload/event/2023/editorial_01.png?ver=2" />
+          <img
+            src="https://www.whoisnerdy.com/web/upload/event/2023/editorial_01.png?ver=2"
+            alt=""
+          />
         </BestItemBanner>
         <ItemText>
           <p>{productList.length}개의 상품이 있습니다</p>

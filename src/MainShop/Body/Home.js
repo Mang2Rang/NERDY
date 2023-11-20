@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { MainBanner } from "./MainBanner";
 import { SlideItem } from "./SlideItem";
 import { SlideFooterBar } from "../Footer/SlideFooterBar";
-import { Login } from "../Header/Login";
+
 // import { createContext, useState } from "react";
 
 const Container = styled.div`
@@ -28,7 +28,7 @@ export function Home() {
   // );
   return (
     <>
-      {/* <NerdyContext.Provider value={{ loginState }}> */}
+      {/* <NerdyContext.Provider value={{ loginState, setLoginState }}> */}
       <Container>
         <StyledMainBanner>
           <MainBanner />

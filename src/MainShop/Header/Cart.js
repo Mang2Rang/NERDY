@@ -62,7 +62,6 @@ const GoLoginBtn = styled.div`
   width: 78%;
   height: 100%;
   padding: 20px 0 0 0;
-
   button {
     width: 90%;
     height: 16%;

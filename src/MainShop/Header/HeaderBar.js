@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
+import { SnapBody } from "../Body/SnapBody";
+import { useState } from "react";
 
 const Container = styled.div`
   position: sticky;
@@ -9,7 +11,7 @@ const Container = styled.div`
   height: 80px;
   width: 100%;
   display: flex;
-  z-index: 1000;
+  z-index: 10;
   background-color: white;
 `;
 
@@ -36,25 +38,65 @@ const NavMid = styled.div`
 const Ul = styled.ul`
   display: flex;
   list-style: none;
+  gap: 1rem;
 `;
 
 const Li = styled.li`
-  font-weight: 500;
+  font-weight: 600;
   font-size: 15px;
   padding: 0 10px;
-  gap: 1.5rem;
 `;
+const CusNavLink = styled(NavLink)`
+  position: relative;
+  padding: 2px 0 2px 0;
+  cursor: pointer;
+  width: 0%;
+  text-decoration: none;
+  color: black;
+  ${Li}:first-child & {
+    color: #7a2bdf;
+    &::before {
+      border-top: 2px solid #7a2bdf;
+    }
+    &::after {
+      border-bottom: 2px solid #7a2bdf;
+    }
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-top: 2px solid black;
+    transition: width 300ms ease-in-out;
+  }
+  &:hover::before {
+    width: 100%;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    border-bottom: 2px solid black;
+    transition: width 300ms ease-in-out;
+    transition-delay: 0.2s;
+  }
+  &:hover::after {
+    width: 100%;
+  }
+`;
+
 const LiSmall = styled.li`
   font-size: 13px;
   font-weight: 500;
 `;
 const LiBar = styled.li`
   color: #eaeaea;
-`;
-
-const The8 = styled.div`
-  color: #7a2bdf;
-  /* font-weight: 600; */
 `;
 
 //Header 오른쪽 메뉴
@@ -84,34 +126,17 @@ const ICON = styled.div`
   justify-content: space-around;
 `;
 
-const CusNavLink = styled(NavLink)`
-  position: relative;
-  padding: 0 0 1px 0;
-  cursor: pointer;
-  width: 0%;
-  ::before {
-    position: absolute;
-    content: "";
-    top: 0;
-    left: 0;
-    width: 0%;
-    border-top: 2px solid #7a2bdf;
-    transition: width 150ms ease-in-out;
-  }
-  ::after {
-    position: absolute;
-    content: "";
-    bottom: 0px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-top: 2px solid #7a2bdf;
-    border-bottom: 2px solid #7a2bdf;
-    transition: width 300ms ease-in-out;
-  }
-`;
-
 export function HeaderBar() {
+  const [opacity, setOpacity] = useState(0);
+  const [height, setHeight] = useState(0);
+  const handleMouseOver = () => {
+    setOpacity(1);
+    setHeight(360);
+  };
+  const handleMouseOut = () => {
+    setOpacity(0);
+    setHeight(0);
+  };
   return (
     <>
       <Container>
@@ -125,92 +150,72 @@ export function HeaderBar() {
         </Logo>
         <NavMid>
           <Ul>
-            <Li>
-              <CusNavLink
-                to="/the8"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <The8>with THE 8</The8>
-              </CusNavLink>
+            <Li onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+              <CusNavLink to="/the8">with THE 8</CusNavLink>
+              <SnapBody opacity={opacity} height={height} />
             </Li>
             <Li>
-              <CusNavLink
-                to="/bestItem"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <strong>BEST</strong>
-              </CusNavLink>
+              <CusNavLink to="/bestItem">BEST</CusNavLink>
             </Li>
             <Li>
-              <CusNavLink
-                to="/newItem"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <strong>New</strong>
-              </CusNavLink>
+              <CusNavLink to="/newItem">New</CusNavLink>
             </Li>
             <Li>
-              <CusNavLink
-                to="/shoes"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <strong>Shoes</strong>
-              </CusNavLink>
+              <CusNavLink to="/shoes">Shoes</CusNavLink>
             </Li>
             <Li>
-              <CusNavLink
-                to="/acc"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <strong>ACC</strong>
-              </CusNavLink>
+              <CusNavLink to="/acc">ACC</CusNavLink>
             </Li>
             <Li>
-              <CusNavLink
-                to="/outlet"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <strong>OUTLET</strong>
-              </CusNavLink>
+              <CusNavLink to="/outlet">OUTLET</CusNavLink>
             </Li>
             <LiBar>|</LiBar>
             <LiSmall>
-              <CusNavLink
+              <NavLink
                 to="/benefit"
                 style={{ textDecoration: "none", color: "black" }}
               >
                 BENEFIT
-              </CusNavLink>
+              </NavLink>
             </LiSmall>
             <LiSmall>
-              <CusNavLink
+              <NavLink
                 to="/lookbook"
                 style={{ textDecoration: "none", color: "black" }}
               >
                 LOOKBOOK
-              </CusNavLink>
+              </NavLink>
             </LiSmall>
             <LiSmall>
-              <CusNavLink
+              <NavLink
                 to="/community"
                 style={{ textDecoration: "none", color: "black" }}
               >
                 COMMUNITY
-              </CusNavLink>
+              </NavLink>
             </LiSmall>
           </Ul>
         </NavMid>
-        <RUl>
-          <RLi>
-            <NavLink
-              to="/Membership"
-              style={{ textDecoration: "none", color: "grey" }}
-            >
-              멤버쉽가입
-            </NavLink>
-          </RLi>
-        </RUl>
         <RightMenu>
+          {/* 상단 */}
+          <RUl>
+            <RLi>
+              <NavLink
+                to="/login"
+                style={{ textDecoration: "none", color: "#999" }}
+              >
+                로그인
+              </NavLink>
+            </RLi>
+            <RLi>
+              <NavLink
+                to="/Membership"
+                style={{ textDecoration: "none", color: "#999" }}
+              >
+                멤버쉽가입
+              </NavLink>
+            </RLi>
+          </RUl>
           {/* 하단 */}
           <ICON>
             <a href="/search">

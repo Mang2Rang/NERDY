@@ -1,45 +1,29 @@
+import React from "react";
 import styled from "styled-components";
-
-// const togglePopup = () => {
-//   if (showPopup === false) {
-//     setShowPopup(true);
-//   } else {
-//     setShowPopup(false);
-//   }
-// };
+import products from "../DB/Product";
 
 const Ibox = styled.div`
   display: flex;
 `;
+
 const Iimg = styled.img`
-  width: 50%;
-  height: 100%;
+  width: 568px;
+  height: 718px;
 `;
+
 const IIf = styled.div``;
+
 const Ul = styled.div``;
+
 const Li = styled.div`
   margin-top: 50px;
 `;
-const Select = styled.select`
-  margin: 0;
-  min-width: 0;
-  display: block;
-  width: 300px;
-  padding: 8px 8px;
-  font-size: inherit;
-  line-height: inherit;
-  border: 1px solid;
-  border-radius: 4px;
-  color: inherit;
-  background-color: transparent;
-  &:focus {
-    border-color: red;
-  }
-`;
+
 const GoBox = styled.div`
   display: flex;
   margin-top: 50px;
 `;
+
 const InBox = styled.div`
   button {
     width: 200px;
@@ -47,6 +31,7 @@ const InBox = styled.div`
     background-color: white;
   }
 `;
+
 const CartBox = styled.div`
   button {
     width: 200px;
@@ -56,9 +41,11 @@ const CartBox = styled.div`
     border: black;
   }
 `;
+
 const Delivery = styled.div`
   margin-top: 30px;
 `;
+
 const DeliveryIf = styled.div`
   display: flex;
   flex-direction: column;
@@ -76,6 +63,22 @@ const DeliveryText = styled.div`
   color: #343a40;
   font-size: 12px;
 `;
+const SelectBox = styled.select`
+  margin: 0;
+  min-width: 0;
+  display: block;
+  width: 300px;
+  padding: 8px 8px;
+  font-size: inherit;
+  line-height: inherit;
+  border: 1px solid;
+  border-radius: 4px;
+  color: inherit;
+  background-color: transparent;
+  &:focus {
+    border-color: red;
+  }
+`;
 
 const OPTIONS = [
   { value: "", name: "-[필수] 옵션을 선택해주세요-", disabled: true },
@@ -86,77 +89,35 @@ const OPTIONS = [
   { value: "M", name: "M" },
   { value: "S", name: "S" },
 ];
-const SelectBox = (props) => {
-  const handleChange = (e) => {
-    // event handler
-    console.log(e.target.value);
-  };
 
-  return (
-    <Select onChange={handleChange} value={props.defaultValue}>
-      <option key="" value="" disabled>
-        -[필수] 옵션을 선택해주세요-
-      </option>
-      {props.options.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.name}
-        </option>
-      ))}
-    </Select>
-  );
-};
+const SelectBoxWrapper = styled.div`
+  margin-top: 10px;
+`;
 
-function App() {
-  return (
-    <SelectBox options={OPTIONS} defaultValue=" -[필수] 옵션을 선택해주세요-" />
-  );
-}
-
-export default App;
 export function Item() {
+  const product = products[0]; // 여기에서 원하는 상품을 선택하거나 매핑하는 로직을 추가하세요.
+
   return (
     <Ibox>
-      <Iimg src="이미지주소" alt="image" />
+      <Iimg src={product.imageUrl} alt="image" />
       <IIf>
         <Ul>
           <Li>★ 평점</Li>
-          <Li>품명</Li>
-          <Li>가격</Li>
+          <Li>{product.name}</Li>
+          <Li>{product.price}</Li>
         </Ul>
         <Ul>
           <Li>
             컬러
-            <Select>
-              <option key="basic" value="basic">
-                -[필수] 옵션을 선택해주세요-
-              </option>
-              <option key="black" value="black">
-                Black
-              </option>
-              <option key="white" value="white">
-                White
-              </option>
-              <option key="purple" value="purple">
-                Purple
-              </option>
-            </Select>
+            <SelectBoxWrapper>
+              <SelectBox options={OPTIONS} defaultValue="" />
+            </SelectBoxWrapper>
           </Li>
           <Li>
             사이즈
-            <Select>
-              <option key="basic" value="basic">
-                -[필수] 옵션을 선택해주세요-
-              </option>
-              <option key="L" value="L">
-                L
-              </option>
-              <option key="M" value="M">
-                M
-              </option>
-              <option key="S" value="S">
-                S
-              </option>
-            </Select>
+            <SelectBoxWrapper>
+              <SelectBox options={OPTIONS} defaultValue="" />
+            </SelectBoxWrapper>
           </Li>
         </Ul>
         <GoBox>

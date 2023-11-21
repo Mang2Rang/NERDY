@@ -1,7 +1,11 @@
+import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
   width: calc(100vw-10px);
+  min-width: 1200px;
+  max-width: 1400px;
+  margin: 0 auto;
 `;
 const BestItemBanner = styled.div`
   position: relative;
@@ -52,6 +56,22 @@ const ItemIf = styled.div`
 const Sale = styled.div`
   color: red;
 `;
+const ItemTitle = styled.div`
+  color: black;
+  font-size: 14px;
+  display: flex;
+
+  gap: 30px;
+  h1 {
+    font-size: 40px;
+    font-weight: 900;
+    margin-top: 50px;
+  }
+  strong {
+    margin-top: 70px;
+    font-size: 14px;
+  }
+`;
 
 export function BestItem() {
   const productList = [
@@ -60,6 +80,10 @@ export function BestItem() {
   return (
     <>
       <Container>
+        <ItemTitle>
+          <h1>23FW Best상품</h1>
+          <strong>전체</strong>
+        </ItemTitle>
         <BestItemBanner>
           <img
             src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/d6f312b3dac67073bda4b0018a47c320.jpg"

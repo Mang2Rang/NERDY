@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 const Container = styled.div`
   width: calc(100vw-10px);
+  min-width: 1200px;
+  max-width: 1400px;
+  margin: 0 auto;
 `;
 
 const BestItemBanner = styled.div`
@@ -101,7 +104,10 @@ export function NewItem() {
           <strong>전체</strong>
         </ItemTitle>
         <BestItemBanner>
-          <img src="https://www.whoisnerdy.com/web/upload/event/2023/editorial_01.png?ver=2" />
+          <img
+            src="https://www.whoisnerdy.com/web/upload/event/2023/editorial_01.png?ver=2"
+            alt=""
+          />
         </BestItemBanner>
         <ItemText>
           <p>{productList.length}개의 상품이 있습니다</p>

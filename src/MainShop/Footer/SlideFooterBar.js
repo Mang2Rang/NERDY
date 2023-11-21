@@ -25,7 +25,7 @@ export function SlideFooterBar() {
         <Swiper
           slidesPerView={13}
           loop={true}
-          speed={10000}
+          speed={9000}
           autoplay={{ delay: 0, disableOnInteraction: false }}
           modules={[Autoplay]}
         >

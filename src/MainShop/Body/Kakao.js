@@ -48,8 +48,6 @@ export function Kakao() {
         window.pageYOffset ||
         document.documentElement.scrollTop;
 
-      console.log("현재 스크롤 위치: " + scrollPosition + " 픽셀");
-
       if (scrollPosition >= 380) {
         // 스크롤 위치가 380 이상이면 Top 요소를 보이게 함
         topElement.style.display = "block";

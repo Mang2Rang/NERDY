@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./Body/Home";
 import { Error } from "./Body/Error";
 import { Login } from "./Header/Login";
+import { Register } from "./Header/Register";
 import { Cart } from "./Header/Cart";
 import { Mypage } from "./Header/Mypage";
 import { Search } from "./Header/Search";
@@ -19,6 +20,14 @@ import { Benefit } from "./Header/Benefit";
 import { LookBook } from "./Header/LookBook";
 import { Community } from "./Header/Community";
 import { The8 } from "./Header/The8";
+import { The8LB } from "./Body/LookbookPage/The8LB";
+import { SeasonLb } from "./Body/LookbookPage/SeasonLb";
+import { EarlyLb } from "./Body/LookbookPage/EarlyLb";
+import { BlenkLb } from "./Body/LookbookPage/BlenkLb";
+import { TennisLb } from "./Body/LookbookPage/TennisLb";
+import { DisneyLb } from "./Body/LookbookPage/DisneyLb";
+import { ScrollTop } from "./Header/ScrollTop";
+
 // 글로벌 세팅 구현
 
 const client = new QueryClient();
@@ -32,6 +41,7 @@ export function NerdyShop() {
       <QueryClientProvider client={client}>
         <MyContext.Provider value={{ myGlobalState, setMyGlobalState }}>
           <BrowserRouter>
+            <ScrollTop />
             <Routes>
               <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
@@ -43,9 +53,16 @@ export function NerdyShop() {
                 <Route path="outlet" element={<Ooutlet />} />
                 <Route path="benefit" element={<Benefit />} />
                 <Route path="lookbook" element={<LookBook />} />
+                <Route path="the8lb" element={<The8LB />} />
+                <Route path="seasonlb" element={<SeasonLb />} />
+                <Route path="earlylb" element={<EarlyLb />} />
+                <Route path="blenklb" element={<BlenkLb />} />
+                <Route path="tennislb" element={<TennisLb />} />
+                <Route path="disneylb" element={<DisneyLb />} />
                 <Route path="community" element={<Community />} />
                 <Route path="search" element={<Search />} />
                 <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
                 <Route path="cart" element={<Cart />} />
                 <Route path="gift" element={<Gift />} />
                 <Route path="member" element={<Mypage />} />

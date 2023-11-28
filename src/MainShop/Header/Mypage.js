@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { Login } from "./Login";
 
 const Container = styled.div`
   width: 1000px;
@@ -73,9 +74,9 @@ const Bar2 = styled.div`
   border-bottom: 2px solid #e0e0e0;
 `;
 
-export function Mypage() {
-  return (
-    <>
+const Mypage = ({ isLoggedIn }) => {
+  return <Container>{isLoggedIn ? <Mypage/> : <Login/>}</Container>;
+  <>
       <Container>
         <MypageBox>
           <Level>
@@ -128,5 +129,7 @@ export function Mypage() {
         </OrderBox>
       </Container>
     </>
-  );
-}
+};
+
+export {Mypage};
+

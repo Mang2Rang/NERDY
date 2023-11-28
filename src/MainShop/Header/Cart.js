@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { Login } from "./Login";
 
 const Container = styled.div`
   width: 100%;
@@ -46,7 +47,7 @@ const Money = styled.div`
   }
 `;
 
-const GoHomeBtn = styled.div`
+const GoBIBtn = styled.div`
   width: 100%;
   height: 100%;
   margin-top: 20px;
@@ -80,78 +81,128 @@ const EmptyBox = styled.div`
   width: 100%;
   height: 15px;
 `;
-export function Cart() {
-  const [itemPrices, setItemPrices] = useState([10000, 20000, 30000]); // 예시 데이터
 
-  const totalItemPrice = itemPrices.reduce((acc, price) => acc + price, 0);
+const Cart = ({ isLoggedIn }) => {
+
+  const [itemData, setItemData] = useState([]);
+  const [itemDiscounts, setItemDiscounts] = useState([0]); // 할인금액 추가
+  const [discountAmount, setDiscountAmount] = useState(0);
+
+  useEffect(() => {
+    // 데이터베이스에서 아이템 데이터 가져오는 비동기 함수 (예시)
+    const fetchItemDataFromDatabase = async () => {
+      try {
+        // 실제로는 데이터베이스에서 데이터를 가져오는 로직을 작성
+        const response = await fetch("your-database-endpoint");
+        const data = await response.json();
+        setItemData(data);
+      } catch (error) {
+        console.error("Error fetching item data:", error);
+      }
+    };
+
+    fetchItemDataFromDatabase();
+  }, []); // 빈 배열을 전달하여 한 번만 실행
+
+  const totalItemPrice = itemData.reduce((acc, item, index) => {
+    const discountedPrice = item.price - itemDiscounts[index];
+    return acc + discountedPrice;
+  }, 0);
 
   const delivery = 3000;
 
-  const totalPayment = totalItemPrice + delivery;
-
-  return (
-    <>
-      <Container>
-        <CartBox>
-          <CartTextBox>
-            <h2>장바구니</h2>
-            <Bar />
-            <ItemBox>
-              {/* <Item/> */}
-              {itemPrices.map((price, index) => (
-                <div key={index}>{/* 여기에 각 아이템의 정보 표시 */}</div>
-              ))}
-            </ItemBox>
-            <Bar />
-            <EmptyBox />
-            <GoHomeBtn>
-              <NavLink
-                to="/bestitem"
-                style={{ textDecoration: "none", color: "#424242" }}
-              >
-                <button>+ 더 담으러 가기</button>
-              </NavLink>
-            </GoHomeBtn>
-            {/* <Item/> */}
-            {itemPrices.map((price, index) => (
-              <div key={index}>{/* 여기에 각 아이템의 정보 표시 */}</div>
-            ))}
-          </CartTextBox>
-          <PayBox>
-            <Bar2 />
-            <h2>결제 내역</h2>
-            <Pay>
-              <PayName>
-                <p>총 상품금액</p>
-                <p>총 할인금액</p>
-                <p>배송비</p>
-              </PayName>
-              <Money>
-                <h4>{totalItemPrice}원</h4>
-                <h4>원</h4>
-                <h4>{delivery}원</h4>
-              </Money>
-            </Pay>
-            <Bar2 />
-            <Pay>
-              <PayName>
-                <p>총 결제금액</p>
-              </PayName>
-              <Money>
-                <h4>{totalPayment}원</h4>
-              </Money>
-            </Pay>
-            <GoLoginBtn>
-              <NavLink
-                to="/login"
-                style={{ textDecoration: "none", color: "#424242" }}
-              >
-                <button>결제하기</button>
-              </NavLink>
-            </GoLoginBtn>
-          </PayBox>
-        </CartBox>
-      </Container>
-    </>
+  const totalDiscount = itemDiscounts.reduce(
+    (acc, discount) => acc + discount,
+    0
   );
-}
+  const totalPayment = totalItemPrice + delivery - totalDiscount;
+  const calculateTotalDiscount = () => {
+    const totalDiscount = itemDiscounts.reduce(
+      (acc, discount) => acc + discount,
+      0
+    );
+    setDiscountAmount(totalDiscount);
+  };
+  useEffect(() => {
+    calculateTotalDiscount();
+  }, [itemDiscounts]);
+  const updateItemDiscount = (index, newDiscount) => {
+    const updatedItemDiscounts = [...itemDiscounts];
+    updatedItemDiscounts[index] = newDiscount;
+    setItemDiscounts(updatedItemDiscounts);
+  };
+    return (
+        <Container>
+          <CartBox>
+            <CartTextBox>
+              <h2>장바구니</h2>
+              <Bar />
+              <ItemBox>
+                {itemData.map((item, index) => (
+                  <div key={index}>
+                    {/* 여기에 각 아이템의 정보 표시 */}
+                    <p>상품 가격: {item.price}원</p>
+                    <p>할인 금액: {itemDiscounts[index]}원</p>
+                    <input
+                      type="number"
+                      placeholder="할인 금액 입력"
+                      value={itemDiscounts[index]}
+                      onChange={(e) =>
+                        updateItemDiscount(index, parseInt(e.target.value, 10))
+                      }
+                    />
+                  </div>
+                ))}
+              </ItemBox>
+              <Bar />
+              <EmptyBox />
+              <GoBIBtn>
+                <NavLink
+                  to="/bestitem"
+                  style={{ textDecoration: "none", color: "#424242" }}
+                >
+                  <button>+ 더 담으러 가기</button>
+                </NavLink>
+              </GoBIBtn>
+            </CartTextBox>
+            <PayBox>
+              <Bar2 />
+              <h2>결제 내역</h2>
+              <Pay>
+                <PayName>
+                  <p>총 상품금액</p>
+                  <p>총 할인금액</p>
+                  <p>배송비</p>
+                </PayName>
+                <Money>
+                  <h4>{totalItemPrice}원</h4>
+                  <h4>{totalDiscount}원</h4>
+                  <h4>{delivery}원</h4>
+                </Money>
+              </Pay>
+              <Bar2 />
+              <Pay>
+                <PayName>
+                  <p>총 결제금액</p>
+                </PayName>
+                <Money>
+                  <h4>{totalPayment}원</h4>
+                </Money>
+              </Pay>
+              <GoLoginBtn>
+                <NavLink
+                 to={isLoggedIn ? "/cart" : "/login"}
+                 style={{ textDecoration: "none", color: "#424242" }}
+                >
+                    <button>
+                {isLoggedIn ? "결제하기" : "로그인"}
+              </button>
+                </NavLink>
+              </GoLoginBtn>
+            </PayBox>
+          </CartBox>
+        </Container>
+ )
+};
+
+export {Cart};

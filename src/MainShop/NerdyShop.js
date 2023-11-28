@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "react-query";
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./Body/Home";
 import { Error } from "./Body/Error";
@@ -17,16 +17,11 @@ import { NewItem } from "./Header/NewItem";
 import { BestItem } from "./Header/BestItem";
 import { Ooutlet } from "./Header/Ooutlet";
 import { Benefit } from "./Header/Benefit";
-import { LookBook } from "./Header/LookBook";
+import { LookBookRoutes } from "./Header/LookBook";
 import { Community } from "./Header/Community";
 import { The8 } from "./Header/The8";
-import { The8LB } from "./Body/LookbookPage/The8LB";
-import { SeasonLb } from "./Body/LookbookPage/SeasonLb";
-import { EarlyLb } from "./Body/LookbookPage/EarlyLb";
-import { BlenkLb } from "./Body/LookbookPage/BlenkLb";
-import { TennisLb } from "./Body/LookbookPage/TennisLb";
-import { DisneyLb } from "./Body/LookbookPage/DisneyLb";
 import { ScrollTop } from "./Header/ScrollTop";
+import { getAllProducts } from "./Api/api";
 
 // 글로벌 세팅 구현
 
@@ -35,11 +30,25 @@ export const MyContext = createContext();
 
 export function NerdyShop() {
   const [myGlobalState, setMyGlobalState] = useState(null);
+  const [productsList, setProductsList] = useState([]);
+
+  useEffect(() => {
+    getAllProducts().then((products) => {
+      setProductsList(products);
+    });
+  }, []);
 
   return (
     <>
       <QueryClientProvider client={client}>
-        <MyContext.Provider value={{ myGlobalState, setMyGlobalState }}>
+        <MyContext.Provider
+          value={{
+            myGlobalState,
+            setMyGlobalState,
+            // productsList,
+            // setProductsList,
+          }}
+        >
           <BrowserRouter>
             <ScrollTop />
             <Routes>
@@ -51,14 +60,8 @@ export function NerdyShop() {
                 <Route path="shoes" element={<Shoes />} />
                 <Route path="acc" element={<Acc />} />
                 <Route path="outlet" element={<Ooutlet />} />
+                <Route path="lookbook/*" element={<LookBookRoutes />} />
                 <Route path="benefit" element={<Benefit />} />
-                <Route path="lookbook" element={<LookBook />} />
-                <Route path="the8lb" element={<The8LB />} />
-                <Route path="seasonlb" element={<SeasonLb />} />
-                <Route path="earlylb" element={<EarlyLb />} />
-                <Route path="blenklb" element={<BlenkLb />} />
-                <Route path="tennislb" element={<TennisLb />} />
-                <Route path="disneylb" element={<DisneyLb />} />
                 <Route path="community" element={<Community />} />
                 <Route path="search" element={<Search />} />
                 <Route path="login" element={<Login />} />

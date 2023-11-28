@@ -1,12 +1,10 @@
-import { Left } from "./Left";
-import { Right } from "./Right";
+import { Best } from "./Best";
+import { New } from "./New";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { MainBanner } from "./MainBanner";
 import { SlideItem } from "./SlideItem";
 import { SlideFooterBar } from "../Footer/SlideFooterBar";
-
-// import { createContext, useState } from "react";
 
 const Container = styled.div`
   width: calc(100%);
@@ -20,15 +18,10 @@ const StyledMain = styled.div`
   width: 100%;
   height: 400px;
 `;
-// export const NerdyContext = createContext();
 
 export function Home() {
-  // const [loginState, setLoginState] = useState(
-  //   JSON.parse(localStorage.getItem("loginState"))
-  // );
   return (
     <>
-      {/* <NerdyContext.Provider value={{ loginState, setLoginState }}> */}
       <Container>
         <StyledMainBanner>
           <MainBanner />
@@ -36,14 +29,14 @@ export function Home() {
         <SlideItem />
         <StyledMain>
           <Link to="/BestItem" />
-          <Left />
+          <Best />
         </StyledMain>
         <StyledMain>
           <Link to="/NewItem" />
-          <Right />
+          <New />
         </StyledMain>
       </Container>
-      {/* </NerdyContext.Provider> */}
+
       <SlideFooterBar />
     </>
   );

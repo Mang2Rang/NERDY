@@ -148,9 +148,11 @@ export function Search() {
     setSearchKeyword(event.target.value);
   };
   // 검색창에 입력된 값 검색
-  const handleSearchSubmit = (event) => {
+  const handleSearchSubmit = async (event) => {
     event.preventDefault();
     console.log("검색어:", searchKeyword);
+
+    await sendSearchKeywordToServer();
   };
   // 배열로 요소를 만들어서 정해둠 나중에 요소를 바꿔서 서버에서 검색을 제일 많이 한걸로 나타나게 하기
   const rankings = [
@@ -167,6 +169,28 @@ export function Search() {
     "https://whoisnerdy.com/web/upload/images/search_category2.png?ver=0829",
     "https://whoisnerdy.com/web/upload/images/search_category1.png?ver=0829",
   ];
+  // 서버로 검색어를 보내는 코드
+  const sendSearchKeywordToServer = async () => {
+    try {
+      const response = await fetch("http://your-backend-server/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ keyword: searchKeyword }), // 검색어를 JSON 형태로 백엔드에 전송
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        // 서버로부터 받은 데이터 처리
+        console.log(data);
+      } else {
+        console.error("서버로부터 데이터를 받지 못했습니다.");
+      }
+    } catch (error) {
+      console.error("요청 중 오류가 발생했습니다.", error);
+    }
+  };
   return (
     <>
       <Container>
@@ -179,7 +203,7 @@ export function Search() {
               onChange={handleSearchInputChange}
               placeholder="검색어를 입력해주세요"
             />
-            <a>
+            <a onClick={handleSearchSubmit}>
               <img src="https://whoisnerdy.com/web/upload/images/icotb_zoom.png" />
             </a>
           </SearchBox>

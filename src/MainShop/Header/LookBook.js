@@ -1,24 +1,25 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { The8LB } from "../Body/LookbookPage/The8LB";
+import { SeasonLb } from "../Body/LookbookPage/SeasonLb";
+import { EarlyLb } from "../Body/LookbookPage/EarlyLb";
+import { BlenkLb } from "../Body/LookbookPage/BlenkLb";
+import { TennisLb } from "../Body/LookbookPage/TennisLb";
+import { DisneyLb } from "../Body/LookbookPage/DisneyLb";
+import { useEffect, useState } from "react";
+import { getAllLookbooks } from "../Api/api";
 
 const Container = styled.div`
   width: 1200px;
-  height: 2000px;
+  min-width: 1200px;
+  min-height: 100%;
+  min-height: calc(100% - 298px);
   margin: 0 auto;
+  padding: 33px 0 0 0;
+  position: relative;
 `;
-const Content = styled.div`
-  display: flex;
-  margin-bottom: 70px;
-  gap: 30px;
-  justify-content: center;
-`;
-const Content2 = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 70px;
-  gap: 30px;
-  justify-content: center;
-`;
+
 const LbTitle = styled.div`
   display: flex;
   padding: 40px;
@@ -37,6 +38,24 @@ const LbTitle = styled.div`
     color: gray;
   }
 `;
+const Content = styled.div`
+  width: 1200px;
+  overflow: hidden;
+`;
+const UI = styled.ul`
+width: 1230px;
+margin-top: -25px;
+margin-left: -15px;
+display: flex;
+flex-wrap: wrap;
+list-style: none;
+`;
+const LI = styled.li`
+position: relative;
+margin: 28px 15px;
+width: 380px;
+list-style: none;
+`
 const LookbookBox = styled.div`
   h3 {
     font-size: 24px;
@@ -54,65 +73,16 @@ const LookbookBox = styled.div`
     margin-bottom: 14px;
   }
 `;
-const Fbox = styled.div`
-  margin-bottom: 18px;
-  height: 288px;
-  width: 380px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 5px;
-  img {
-    position: absolute;
-    height: 288px;
-    width: 380px;
-    top: 0;
-    left: 0;
-    border-radius: 5px;
-  }
-`;
-const Fog = styled.div`
-  transition: 0.5s;
-  cursor: pointer;
-  position: absolute;
-  z-index: 100;
-  height: 380px;
-  width: 500px;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.5);
-`;
-const Ftext = styled.div`
-  position: absolute;
-  z-index: 1000;
-  right: 0;
-  top: 0;
-  width: 95px;
-  height: 56px;
-  box-sizing: border-box;
-  font-size: 19.4px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 56px;
-  letter-spacing: -1px;
-  text-align: center;
-  background: rgba(0, 0, 0, 1);
-  color: #ffffff;
-`;
-const LookbookBox2 = styled.div`
-  h3 {
-    font-size: 24px;
-    font-weight: 500;
-    margin-bottom: 12px;
-  }
-  p {
-    font-size: 16px;
-    font-weight: 600;
-  }
-  position: relative;
-  width: 380px;
-`;
+
+
 export function LookBook() {
+  const [lookbookList, setLookbookList] = useState([]);
+
+  useEffect(()=>{
+    getAllLookbooks().then((lookbook) =>{
+      setLookbookList(lookbook);
+    })
+  },[])
   return (
     <>
       <Container>
@@ -123,164 +93,40 @@ export function LookBook() {
           <p>종료</p>
         </LbTitle>
         <Content>
+          <UI>
+            {lookbookList.map((lookbook,index)=>(
+            <LI key={lookbook.id}>
           <LookbookBox>
             <NavLink
-              to="/the8lb"
+              to={lookbook.path}
               style={{ textDecoration: "none", color: "black" }}
             >
               <img
-                src="https://whoisnerdy.com/file_data/multinex//2023/11/08/cd13caff572da93318bf9fd7cb844f99.jpg"
-                alt=""
+                src={lookbook.img}
+                alt="이미지"
               />
             </NavLink>
-            <h3>NERDY with THE 8 LOOKBOOK</h3>
-            <p>2023.11.01~</p>
+            <h3>{lookbook.title}</h3>
+            <p>{lookbook.date}</p>
           </LookbookBox>
-          <LookbookBox>
-            <NavLink
-              to="/seasonlb"
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <img
-                src="https://whoisnerdy.com/file_data/multinex//2023/09/25/e3abb77fa6f0bdd0269e043cd1d90ff9.jpg"
-                alt=""
-              />
-            </NavLink>
-            <h3>23FW SEASON LOOKBOOK</h3>
-            <p>2023.09.01~</p>
-          </LookbookBox>
-          <LookbookBox>
-            <NavLink
-              to="/earlylb"
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <img
-                src="https://whoisnerdy.com/file_data/multinex//2023/09/12/3db4ecf25869c34233f368085cfe2250.jpg"
-                alt=""
-              />
-            </NavLink>
-            <h3>23FW EARLY BIRD</h3>
-            <p>2023.08.29~</p>
-          </LookbookBox>
+          </LI>
+        ))}
+        </UI>
         </Content>
-        <Content>
-          <LookbookBox>
-            <NavLink
-              to="/blenklb"
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <img
-                src="https://whoisnerdy.com/file_data/multinex//2023/04/28/7984939c370cc326fff0adc7bcb2dc5b.jpg"
-                alt=""
-              />
-            </NavLink>
-            <h3>BL'E'NK COLLECTION Vol.02</h3>
-            <p>2023.04.27~</p>
-          </LookbookBox>
-          <LookbookBox>
-            <NavLink
-              to="/tennislb"
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <img
-                src="https://whoisnerdy.com/file_data/multinex//2023/03/30/4bf951ddeb61a1c1075be31cc8c2f066.jpg"
-                alt=""
-              />
-            </NavLink>
-            <h3>NERDY TENNIS LOOK</h3>
-            <p>2023.03.30~</p>
-          </LookbookBox>
-          <LookbookBox>
-            <NavLink
-              to="/disneylb"
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <img
-                src="https://whoisnerdy.com/file_data/multinex//2023/03/27/a4861a9c8031617022b2471c7c49f399.jpg"
-                alt=""
-              />
-            </NavLink>
-            <h3>DISNEY 2ND COLLECTION</h3>
-            <p>2023.11.01~</p>
-          </LookbookBox>
-        </Content>
-        <Content2>
-          <LookbookBox2>
-            <Ftext>종료</Ftext>
-            <Fbox>
-              <Fog />
-              <img
-                src="https://whoisnerdy.com/file_data/multinex//2022/11/29/9de960b12471f2c9f27a91cd6145ae95.jpg"
-                alt=""
-              />
-            </Fbox>
-            <h3>CAMPING IN THE WINTER</h3>
-            <p>2022.11.28~2022.12.31</p>
-          </LookbookBox2>
-          <LookbookBox2>
-            <Ftext>종료</Ftext>
-            <Fbox>
-              <Fog />
-              <img
-                src="https://whoisnerdy.com/file_data/multinex//2022/10/06/9540f0d073ca1e23f958cc2c2fcd6728.jpg"
-                alt=""
-              />
-            </Fbox>
-            <h3>22FW TAEYEON 2ND COLLECTION</h3>
-            <p>2022.10.06~2022.12.31</p>
-          </LookbookBox2>
-          <LookbookBox2>
-            <Ftext>종료</Ftext>
-            <Fbox>
-              <Fog />
-              <img
-                src="https://whoisnerdy.com/file_data/multinex//2022/10/06/2be073b16fa2a3f4549993b8d7269f03.jpg"
-                alt=""
-              />
-            </Fbox>
-            <h3>NERDY x YONSEI UNIVERSITY</h3>
-            <p>2022.09.23~2022.12.31</p>
-          </LookbookBox2>
-        </Content2>
-        <Content2>
-          <LookbookBox2>
-            <Ftext>종료</Ftext>
-            <Fbox>
-              <Fog />
-              <img
-                src="https://whoisnerdy.com/file_data/multinex//2022/08/31/e106a3fb33e0f30d72ce5e699ed8a6b1.jpg"
-                alt=""
-              />
-            </Fbox>
-            <h3>HYNDAI DEPARTMENT STO...</h3>
-            <p>2022.08.31~2022.12.31</p>
-          </LookbookBox2>
-          <LookbookBox2>
-            <Ftext>종료</Ftext>
-            <Fbox>
-              <Fog />
-              <img
-                src="https://whoisnerdy.com/file_data/multinex//2022/08/16/b2afd74acf2d9752818bb166bc789c2c.jpg"
-                alt=""
-              />
-            </Fbox>
-            <h3>22FW TAEYEON 1ST COLLECTION</h3>
-            <p>2022.08.16~2022.12.31</p>
-          </LookbookBox2>
-          <LookbookBox2>
-            <Ftext>종료</Ftext>
-            <Fbox>
-              <Fog />
-              <img
-                src="https://whoisnerdy.com/file_data/multinex//2022/06/02/6bb8d93c826c0339fcbfb24e6cf69be3.jpg"
-                alt=""
-              />
-            </Fbox>
-            <h3>DERDIST ADORA</h3>
-            <p>2022.06.02~2022.12.31</p>
-          </LookbookBox2>
-        </Content2>
-      </Container>
+        </Container>
     </>
+  );
+}
+export function LookBookRoutes() {
+  return (
+    <Routes>
+      <Route index element={<LookBook />} />
+      <Route path="the8lb" element={<The8LB />} />
+      <Route path="seasonlb" element={<SeasonLb />} />
+      <Route path="earlylb" element={<EarlyLb />} />
+      <Route path="blenklb" element={<BlenkLb />} />
+      <Route path="tennislb" element={<TennisLb />} />
+      <Route path="disneylb" element={<DisneyLb />} />
+    </Routes>
   );
 }

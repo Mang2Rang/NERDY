@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { getAllProducts } from "../Api/api";
 
 const Container = styled.div`
   width: calc(100vw-10px);
@@ -24,6 +27,8 @@ const BestItemBanner = styled.div`
 const Ul = styled.div`
   width: 100%;
   height: 500px;
+  display: flex;
+  flex-wrap: wrap;
 `;
 const ItemText = styled.div`
   color: black;
@@ -85,17 +90,13 @@ const ItemTitle = styled.div`
 `;
 
 export function NewItem() {
-  const productList = [
-    /* 리스트에 상품 정보를 추가하세요 */
+  const [productList, setProductList] = useState([]);
 
-    {
-      imageUrl:
-        "https://www.whoisnerdy.com/web/product/big/202307/8133f567f6daca77d0eb9e5c0ba5b1e3.png",
-      name: "후리스",
-      salePercentage: "20%",
-      link: "",
-    },
-  ];
+  useEffect(() => {
+    getAllProducts().then((products) => {
+      setProductList(products);
+    });
+  }, []);
   return (
     <>
       <Container>
@@ -114,11 +115,16 @@ export function NewItem() {
         </ItemText>
         <Ul>
           {productList.map((product, index) => (
-            <Li key={index}>
+            <Li key={product.id}>
               <Thumbnail>
-                <a href={product.link}>
-                  <img src={product.imageUrl} alt="이미지" />
-                </a>
+                <NavLink
+                  to="/item"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <a href={product.link}>
+                    <img src={product.mainimg} alt="이미지" />
+                  </a>
+                </NavLink>
                 <BestNum>
                   <p>Best</p>
                   <p>{index + 1}</p>
@@ -127,7 +133,7 @@ export function NewItem() {
                   <p>★ 평점</p>
                   <p>{product.name}</p>
                   <p>
-                    <Sale>{product.salePercentage}</Sale> ~원
+                    <Sale>{product.sale}%</Sale> ~원
                   </p>
                 </ItemIf>
               </Thumbnail>

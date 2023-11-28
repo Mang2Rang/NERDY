@@ -1,19 +1,42 @@
 // 아이템 리스트
-export function getAllGames() {
+export function getAllProducts() {
   return fetch(`http://localhost:8080/products`, {
     method: "GET",
   }).then((response) => response.json());
 }
 
-//  아이템 상세내용
-export function getGameById(id) {
+export function getAllBestItems() {
+  return fetch(`http://localhost:8080/bestitem`, {
+    method: "GET",
+  }).then((response) => response.json());
+}
+
+export function getAllLookbooks() {
+  return fetch(`http://localhost:8080/lookbook`,{
+    method: "GET",
+  }).then((response) => response.json());
+}
+
+// 아이템 상세내용
+export function getProductsById(id) {
   return fetch(`http://localhost:8080/products/${id}`, {
+    method: "GET",
+  }).then((response) => response.json());
+}
+export function getBestItemById(id) {
+  return fetch(`http://localhost:8080/bestitem/${id}`, {
+    method: "GET",
+  }).then((response) => response.json());
+}
+
+export function getLookbookById(id) {
+  return fetch(`http://localhost:8080/lookbook/${id}`, {
     method: "GET",
   }).then((response) => response.json());
 }
 
 // 장바구니
-export function purchaseGames(games, loginId) {
+export function purchaseProducts(games, loginId) {
   const purchases = games.map((game) => ({
     game: game,
     loginId: loginId,
@@ -31,7 +54,7 @@ export function purchaseGames(games, loginId) {
 }
 
 // 사용자 구매목록
-export function getAllPurchasedGames(loginId) {
+export function getAllPurchasedProducts(loginId) {
   return fetch(`http://localhost:8080/products/purchase/${loginId}`, {
     method: "GET",
   }).then((response) => response.json());

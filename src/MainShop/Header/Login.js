@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import React, { useState } from "react";
-// import React, { useContext, useState, useEffect } from "react";
-// import { useQuery } from "react-query";
-// import { NavLink, useNavigate } from "react-router-dom";
-// import * as styledComponents from "styled-components";
-// import { login } from "../Api/api";
-// import { NerdyContext } from "../Body/Home";
+import { useContext, useState, useEffect } from "react";
+import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { login } from "../Api/api";
+// import { MyContext } from "../NerdyShop";
 /**
  * @typeof {Object} CheckProps;
  * @property {boolean} isChecked;
@@ -318,7 +316,7 @@ export function Login() {
   const handleCheck = () => {
     setIsChecked(!isChecked);
   };
-  // const [loginId, setLoginId] = useState("");
+  // const [username, setUsername] = useState("");
   // const [password, setPassword] = useState("");
   // const [userLogin, setUserLogin] = useState("");
   // const [loggingIn, setLoggingIn] = useState(false);
@@ -360,7 +358,7 @@ export function Login() {
   // function onSubmit(e) {
   //   e.preventDefault();
   //   const user = {
-  //     loginId: loginId,
+  //     username: username,
   //     password: password,
   //   };
   //   setUserLogin(user);
@@ -371,21 +369,22 @@ export function Login() {
         <h1>로그인중입니다... </h1>
       ) : loginState?.id ? (
         <h1> 이미 로그인되어 있습니다. {loginState.id}</h1>
-      ) : (
-        <> */}
+      ) : ( */}
+      
+        <>
       <Container>
         <Content>
           <Loginbar>
             <Logintitle>로그인</Logintitle>
             <Filedset>
               <FormBox>
-                <Form>
+                <Form /*onSubmit={onSubmit}*/>
                   <Eplaceholder>
                     <Input
-                      placeholder="아이디"
+                      // placeholder="아이디"
                       // id="loginId"
-                      // value={loginId}
-                      // onChange={(e) => setLoginId(e.target.value)}
+                      // value={username}
+                      // onChange={(e) => setUsername(e.target.value)}
                     />
                     <Input
                       placeholder="비밀번호"
@@ -454,8 +453,8 @@ export function Login() {
         </Content>
       </Container>
     </>
+          {/* )
+      } */}
+     </>
   );
 }
-//     </>
-//   );
-// }

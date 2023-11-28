@@ -1,5 +1,9 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { signUp } from "../Api/api";
+import { MyContext } from "../NerdyShop";
+import { useNavigate } from "react-router-dom";
+import { useQuery } from "react-query";
 // 모든 컨텐츠의 부모
 const Contents = styled.div`
   width: 1200px;
@@ -87,10 +91,11 @@ const Jointh = styled.p`
 `;
 // 입력 구간 서로 띄워놓기
 const Jointd = styled.div`
-  width: calc(100%-130px);
+  width: calc(100% - 130px);
 `;
 // 라벨
 const Labelpl = styled.div``;
+
 // 입력창 기본속성
 const Input = styled.input`
   height: 45px;
@@ -117,7 +122,136 @@ const Personal = styled.div`
   padding-bottom: 10px;
 `;
 
+const Labelplh = styled.div`
+  border: 1px solid #cfcfcf;
+  margin-bottom: 0;
+  position: relative;
+  height: 45px;
+  line-height: 45px;
+  padding: 0 10px;
+`;
+
+const Inputtext = styled.input`
+  width: 50px;
+  height: 41px;
+  line-height: 41px;
+  margin-top: -3px;
+  padding: 0 0;
+  border: none;
+  outline: none;
+  color: #353535;
+  font-size: 12px;
+  vertical-align: middle;
+`;
+
+const Choice = styled.div`
+  margin: 0;
+  padding: 0;
+`;
+
+const Gender = styled.p`
+  margin: 0;
+  padding: 0;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+`;
+const Gendercheck = styled.input`
+  display: none;
+
+  &:checked + label::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    background: url("https://whoisnerdy.com/web/upload/img/radio_checked.png")
+      no-repeat center/cover;
+    vertical-align: middle;
+  }
+
+  &:not(:checked) + label::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    background: url("https://whoisnerdy.com/web/upload/img/radio_uncheck.png")
+      no-repeat center/cover;
+    vertical-align: middle;
+  }
+`;
+const Genderlabel = styled.label`
+  margin-right: 30px;
+  font-size: 15px;
+`;
+
+const Btnjoin = styled.div`
+  text-align: center;
+  padding: 0 0;
+  height: 60px;
+  width: 100%;
+  margin-bottom: 200px;
+`;
+
+const Submitbtn = styled.button`
+  border: none;
+  outline: none;
+  display: block;
+  color: #fff;
+  width: 100%;
+  font-size: 16px;
+  text-align: center;
+  background: #000;
+  line-height: 60px;
+  height: 60px;
+  font-weight: 600;
+`;
 export function Register() {
+
+  const navigate = useNavigate();
+  const { loginState, setLoginState } = useContext(MyContext);
+  const [userRegister, setUserRegister] = useState(null);
+
+  const { data, isLoading, refetch} = useQuery("register", () => {
+    if(userRegister){
+      // setRegistering(true);
+      return signUp(userRegister);
+    }
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [userRegister]);
+
+// 버튼 클릭시 정보가 서버로 전송
+  const onSubmit = async (e) =>{
+    e.preventDefault();
+    try{
+    const user ={
+      username: username,
+      password: password,
+      name: document.getElementById('realname').value,
+      birthDate: `${year}-${month}-${day}`,
+      gender: selectedGender,
+      email: email,
+    };
+    console.log(user)
+    const response = await signUp(user);
+
+    if (response.resultCode === "SUCCESS"){
+      localStorage.setItem("loginState", JSON.stringify({id:userRegister.username}));
+      setLoginState({id:username});
+      navigate("/signup");
+    } else {
+      navigate("/login");
+    }
+  } catch (error) {
+    console.error("Error during signup:", error);
+  }
+}
   // 아이디에 useState를 사용해서 오류를 표시해줌
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
@@ -173,12 +307,66 @@ export function Register() {
     setEmail(value);
     validateEmail(value);
   };
+
+  // 생년월일 입력 제한 및 오류 담당
+  const [realname, setRealname] = useState("");
+  const [year, setYear] = useState("");
+  const [month, setMonth] = useState("");
+  const [day, setDay] = useState("");
+  const [birthError, setBirthError] = useState("");
+
+  const handleRealnameChange = (event) => {
+    const {value} = event.target;
+    setRealname(value);
+  }
+
+  // 각 입력 필드의 변경 핸들러
+  const handleYearChange = (event) => {
+    const { value } = event.target;
+    setYear(value); // 입력값 그대로 설정
+    validateDate();
+  };
+
+  const handleMonthChange = (event) => {
+    const { value } = event.target;
+    setMonth(value); // 입력값 그대로 설정
+    validateDate();
+  };
+
+  const handleDayChange = (event) => {
+    const { value } = event.target;
+    setDay(value); // 입력값 그대로 설정
+    validateDate();
+  };
+
+  const validateDate = () => {
+    const numericYear = parseInt(year, 10); // 문자열 year를 숫자로 변환
+    if (!(year && month && day)) {
+      setBirthError("년월일을 모두 입력하세요.");
+    } else if (
+      !(numericYear >= 1000 && numericYear <= new Date().getFullYear())
+    ) {
+      setBirthError("올바른 연도를 입력하세요.");
+    } else if (!(month >= 1 && month <= 12)) {
+      setBirthError("올바른 월을 입력하세요.");
+    } else if (!(day >= 1 && day <= 31)) {
+      setBirthError("올바른 일을 입력하세요.");
+    } else {
+      setBirthError("");
+    }
+  };
+
+  const [selectedGender, setSelectedGender] = useState("");
+
+  const handleGenderChange = (event) => {
+    setSelectedGender(event.target.value);
+  };
   return (
     <>
       <Contents>
         <Joinbody>
           <Joinbodytitle>회원가입</Joinbodytitle>
-          <Joinform>
+          <Joinform onSubmit={onSubmit}>
             <Jointit>본인인증하기</Jointit>
             <MobileWrap>
               <MobilePopup>
@@ -195,11 +383,20 @@ export function Register() {
                       <Input
                         style={{ width: "200px", marginTop: "-4px" }}
                         placeholder="아이디"
+                        id="loginId"
                         value={username}
                         onChange={handleUsernameChange}
                       />
                       {error && (
-                        <div style={{ color: "red", fontSize: "13px" }}>
+                        <div
+                          style={{
+                            color: "#c8002f",
+                            fontSize: "13px",
+                            margin: "10px 0",
+                            padding: "0 0 0 0",
+                            letterspacing: " -0.5px",
+                          }}
+                        >
                           {error}
                         </div>
                       )}
@@ -226,7 +423,15 @@ export function Register() {
                         onChange={handleConfirmPasswordChange}
                       />
                       {!passwordsMatch && (
-                        <span style={{ color: "red" }}>
+                        <span
+                          style={{
+                            color: "#c8002f",
+                            fontSize: "13px",
+                            margin: "10px 0",
+                            padding: "0 0 0 0",
+                            letterspacing: " -0.5px",
+                          }}
+                        >
                           {passwordErrorText}
                         </span>
                       )}
@@ -259,10 +464,78 @@ export function Register() {
               >
                 <Jointr>
                   <Jointh>이름</Jointh>
-                  <Jointd></Jointd>
+                  <Jointd>
+                    <Labelpl>
+                      <Input placeholder="이름" 
+                      id="realname"
+                      value={realname}
+                      onChange={handleRealnameChange}/>
+                    </Labelpl>
+                  </Jointd>
+                </Jointr>
+                <Jointr>
+                  <Jointh>생년월일</Jointh>
+                  <Jointd>
+                    <Labelplh>
+                      <Inputtext
+                        value={year}
+                        onChange={handleYearChange}
+                        maxLength={4}
+                      />
+                      년
+                      <Inputtext
+                        value={month}
+                        onChange={handleMonthChange}
+                        maxLength={2}
+                      />
+                      월
+                      <Inputtext
+                        value={day}
+                        onChange={handleDayChange}
+                        maxLength={2}
+                      />
+                      일
+                    </Labelplh>
+                    {birthError && <span>{birthError}</span>}
+                  </Jointd>
                 </Jointr>
               </Joininfo>
             </Personal>
+            <Choice>
+              <Jointit>선택사항</Jointit>
+              <Joininfo>
+                <Jointr>
+                  <Jointh>성별</Jointh>
+                  <Jointd>
+                    <Labelplh style={{ border: "none" }}>
+                      <Gender>
+                        <Gendercheck
+                          type="radio"
+                          id="male"
+                          name="gender"
+                          value="male"
+                          checked={selectedGender === "male"}
+                          onChange={handleGenderChange}
+                        />
+                        <Genderlabel htmlFor="male">남자</Genderlabel>
+                        <Gendercheck
+                          type="radio"
+                          id="female"
+                          name="gender"
+                          value="female"
+                          checked={selectedGender === "female"}
+                          onChange={handleGenderChange}
+                        />
+                        <Genderlabel htmlFor="female">여자</Genderlabel>
+                      </Gender>
+                    </Labelplh>
+                  </Jointd>
+                </Jointr>
+              </Joininfo>
+            </Choice>
+            <Btnjoin>
+              <Submitbtn type="submit">가입하기</Submitbtn>
+            </Btnjoin>
           </Joinform>
         </Joinbody>
       </Contents>

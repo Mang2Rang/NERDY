@@ -1,18 +1,20 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 import { SnapBody } from "../Body/SnapBody";
-import { useState } from "react";
+import React, { useState } from "react";
+import { Membership } from "../Header/Membership";
+import { Mypage } from "../Header/Mypage";
+import { Register } from "../Header/Register";
 
 const Container = styled.div`
   position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   height: 80px;
   width: 100%;
   display: flex;
-  z-index: 10;
+  z-index: 2000;
   background-color: white;
+  border-bottom: 1px solid #eaeaea;
 `;
 
 //Heaer 로고 부분
@@ -124,6 +126,10 @@ const RLi = styled.li`
 const ICON = styled.div`
   display: flex;
   justify-content: space-around;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  gap: 10px;
 `;
 
 export function HeaderBar() {
@@ -136,6 +142,12 @@ export function HeaderBar() {
   const handleMouseOut = () => {
     setOpacity(0);
     setHeight(0);
+  };
+  const [isRegisterVisible, setIsRegisterVisible] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const handleLoginStatusChange = () => {
+    setIsLoggedIn((prevIsLoggedIn) => !prevIsLoggedIn);
+    setIsRegisterVisible(true);
   };
   return (
     <>
@@ -209,14 +221,14 @@ export function HeaderBar() {
             </RLi>
             <RLi>
               <NavLink
-                to="/Membership"
+                to="/register"
                 style={{ textDecoration: "none", color: "#999" }}
               >
                 멤버쉽가입
               </NavLink>
             </RLi>
           </RUl>
-          {/* 하단 */}
+
           <ICON>
             <a href="/search">
               <img

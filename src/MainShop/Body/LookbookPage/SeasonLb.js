@@ -1,23 +1,25 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import {SlideBox2} from "../SlideBox2";
 
 const Container = styled.div`
-  height: 1000px;
-  margin: 0 auto;
-  max-width: 1400px;
-  min-width: 1200px;
+  height: 80%;   
 `;
-const Ul = styled.div`
-  height: 700px;
-`;
+
 const GoNewItem = styled.div`
+display: flex;
+  width: 100vw;
+  justify-content: center;
+  text-align: center;
+  margin: 50px 0 100px;
+
   button {
     width: 200px;
     height: 50px;
     border: 1px solid black;
     font-size: 16px;
-    margin-left: 600px;
     background-color: white;
+    cursor: pointer;
   }
 `;
 
@@ -25,7 +27,7 @@ export function SeasonLb() {
   return (
     <>
       <Container>
-        <Ul></Ul>
+      <SlideBox2 />
         <GoNewItem>
           <NavLink
             to="/NewItem"

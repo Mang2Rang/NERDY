@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import products from "../DB/Product";
 
 const Ibox = styled.div`
   display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  gap: 50px;
+  margin-top: 50px;
 `;
 
 const Iimg = styled.img`
@@ -79,24 +83,34 @@ const SelectBox = styled.select`
     border-color: red;
   }
 `;
-
-const OPTIONS = [
-  { value: "", name: "-[필수] 옵션을 선택해주세요-", disabled: true },
-  { value: "black", name: "Black" },
-  { value: "white", name: "White" },
-  { value: "purple", name: "Purple" },
-  { value: "L", name: "L" },
-  { value: "M", name: "M" },
-  { value: "S", name: "S" },
-];
+const SelectOption = styled.option``;
 
 const SelectBoxWrapper = styled.div`
   margin-top: 10px;
 `;
 
 export function Item() {
-  const product = products[0]; // 여기에서 원하는 상품을 선택하거나 매핑하는 로직을 추가하세요.
-
+  const product = products[0]; // 여기에서 원하는 상품을 선택하거나 매핑하는 로직을 추가
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+  const handleColorChange = (event) => {
+    setSelectedColor(event.target.value);
+  };
+  const COPTIONS = [
+    { value: "", name: "-[필수] 옵션을 선택해주세요-", disabled: true },
+    { value: "black", name: "Black" },
+    { value: "white", name: "White" },
+    { value: "purple", name: "Purple" },
+  ];
+  const handleSizeChange = (event) => {
+    setSelectedSize(event.target.value);
+  };
+  const SOPTIONS = [
+    { value: "", name: "-[필수] 옵션을 선택해주세요-", disabled: true },
+    { value: "L", name: "L" },
+    { value: "M", name: "M" },
+    { value: "S", name: "S" },
+  ];
   return (
     <Ibox>
       <Iimg src={product.imageUrl} alt="image" />
@@ -110,13 +124,33 @@ export function Item() {
           <Li>
             컬러
             <SelectBoxWrapper>
-              <SelectBox options={OPTIONS} defaultValue="" />
+              <SelectBox value={selectedColor} onChange={handleColorChange}>
+                {COPTIONS.map((option) => (
+                  <SelectOption
+                    key={option.value}
+                    value={option.value}
+                    disabled={option.disabled}
+                  >
+                    {option.name}
+                  </SelectOption>
+                ))}
+              </SelectBox>
             </SelectBoxWrapper>
           </Li>
           <Li>
             사이즈
             <SelectBoxWrapper>
-              <SelectBox options={OPTIONS} defaultValue="" />
+              <SelectBox value={selectedSize} onChange={handleSizeChange}>
+                {SOPTIONS.map((option) => (
+                  <SelectOption
+                    key={option.value}
+                    value={option.value}
+                    disabled={option.disabled}
+                  >
+                    {option.name}
+                  </SelectOption>
+                ))}
+              </SelectBox>
             </SelectBoxWrapper>
           </Li>
         </Ul>

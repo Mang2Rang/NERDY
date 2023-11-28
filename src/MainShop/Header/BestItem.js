@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { useState, useEffect } from "react";
+import { getAllBestItems } from "../Api/api";
 
 const Container = styled.div`
   width: calc(100vw-10px);
@@ -30,6 +32,7 @@ const ItemText = styled.div`
   font-size: 14px;
 `;
 const Thumbnail = styled.div`
+position: relative;
   margin-top: 30px;
   img {
     width: 100%;
@@ -37,15 +40,20 @@ const Thumbnail = styled.div`
   }
 `;
 const BestNum = styled.div`
+   position: absolute;
+  top:0;
+  left: 0;
   width: 40px;
   height: 35px;
   background-color: black;
   color: white;
   font-size: 12px;
   font-weight: 900;
-  display: flex;
+
   align-items: center;
   flex-direction: column;
+  text-align: center;
+  z-index: 100;
 `;
 const Li = styled.div``;
 const ItemIf = styled.div`
@@ -74,9 +82,13 @@ const ItemTitle = styled.div`
 `;
 
 export function BestItem() {
-  const productList = [
-    /* 리스트에 상품 정보를 추가하세요 */
-  ];
+  const [bestitemList, setBestItemList] = useState([]);
+
+  useEffect(() => {
+    getAllBestItems().then((bestitem) => {
+      setBestItemList(bestitem);
+    });
+  }, []);
   return (
     <>
       <Container>
@@ -91,14 +103,14 @@ export function BestItem() {
           />
         </BestItemBanner>
         <ItemText>
-          <p>{productList.length}개의 상품이 있습니다</p>
+          <p>{bestitemList.length}개의 상품이 있습니다</p>
         </ItemText>
         <Ul>
-          {productList.map((product, index) => (
-            <Li key={index}>
+          {bestitemList.map((bestitem, index) => (
+            <Li key={bestitem.id}>
               <Thumbnail>
-                <a href={product.link}>
-                  <img src={product.imageUrl} alt="이미지" />
+                <a href={bestitem.link}>
+                  <img src={bestitem.mainimg} alt="이미지" />
                 </a>
                 <BestNum>
                   <p>Best</p>
@@ -106,9 +118,9 @@ export function BestItem() {
                 </BestNum>
                 <ItemIf>
                   <p>★ 평점</p>
-                  <p>{product.name}</p>
+                  <p>{bestitem.name}</p>
                   <p>
-                    <Sale>{product.salePercentage}</Sale> ~원
+                    <Sale>{bestitem.sale}</Sale> {bestitem.price}원
                   </p>
                 </ItemIf>
               </Thumbnail>

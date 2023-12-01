@@ -9,7 +9,6 @@ const OutletContainer = styled.div`
   height: 907px;
   background-color: black;
   position: relative;
-  top: -44px;
   margin: 0 auto;
   font-family: "Pretendard", sans-serif;
   h1 {
@@ -20,7 +19,6 @@ const OutletContainer = styled.div`
     line-height: normal;
     letter-spacing: normal;
     color: #fff;
-    margin-top: 44px;
   }
   h2 {
     font-size: 28px;

@@ -1,10 +1,15 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { getAllShoes } from "../Api/api";
+import { PriceCalc } from "../Body/PriceCalc";
 
 const Container = styled.div`
   width: calc(100vw-10px);
   min-width: 1200px;
   max-width: 1400px;
   margin: 0 auto;
+  min-height: calc(100% - 298px);
+  overflow: hidden;
 `;
 
 const BestItemBanner = styled.div`
@@ -19,9 +24,16 @@ const BestItemBanner = styled.div`
     object-fit: cover;
   }
 `;
-const Ul = styled.div`
-  width: 100%;
-  height: 500px;
+const Ul = styled.ul`
+  margin: 0 -10px;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+`;
+const Li = styled.li`
+  flex: 0 0 20%;
+  padding: 0 0 80px 0;
+  list-style: none;
 `;
 const ItemText = styled.div`
   color: black;
@@ -31,31 +43,38 @@ const ItemText = styled.div`
     margin-bottom: 40px;
   }
 `;
+const Box = styled.div`
+  padding: 0 10px;
+  overflow: hidden;
+`;
 const Thumbnail = styled.div`
-  margin-top: 30px;
+  position: relative;
+  margin: 0 0 0 0;
+  overflow: hidden;
+  a {
+    text-decoration: none;
+    color: #000;
+  }
   img {
+    border: 0;
     width: 100%;
-    height: 400px;
+    vertical-align: top;
   }
 `;
-const BestNum = styled.div`
-  width: 40px;
-  height: 35px;
-  background-color: black;
-  color: white;
-  font-size: 12px;
-  font-weight: 900;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`;
-const Li = styled.div``;
+
 const ItemIf = styled.div`
   p {
-    display: flex;
+    position: relative;
+    text-align: center;
+    padding: 14px 0 0 0;
+    font-size: 15px;
   }
 `;
 const Sale = styled.div`
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 500;
+  margin-right: 2px;
   color: red;
 `;
 const ItemTitle = styled.div`
@@ -79,9 +98,13 @@ const ItemTitle = styled.div`
   }
 `;
 export function Shoes() {
-  const productList = [
-    /* 리스트에 상품 정보를 추가하세요 */
-  ];
+  const [shoesList, setShoesList] = useState([]);
+
+  useEffect(() => {
+    getAllShoes().then((shoes) => {
+      setShoesList(shoes);
+    });
+  });
   return (
     <>
       <Container>
@@ -99,27 +122,24 @@ export function Shoes() {
           />
         </BestItemBanner>
         <ItemText>
-          <p>{productList.length}개의 상품이 있습니다</p>
+          <p>{shoesList.length}개의 상품이 있습니다</p>
         </ItemText>
         <Ul>
-          {productList.map((product, index) => (
-            <Li key={index}>
-              <Thumbnail>
-                <a href={product.link}>
-                  <img src={product.imageUrl} alt="이미지" />
-                </a>
-                <BestNum>
-                  <p>Best</p>
-                  <p>{index + 1}</p>
-                </BestNum>
-                <ItemIf>
-                  <p>★ 평점</p>
-                  <p>{product.name}</p>
-                  <p>
-                    <Sale>{product.salePercentage}</Sale> ~원
-                  </p>
-                </ItemIf>
-              </Thumbnail>
+          {shoesList.map((shoes, index) => (
+            <Li key={shoes.id}>
+              <Box>
+                <Thumbnail>
+                  <a href={shoes.link}>
+                    <img src={shoes.mainimg} alt="이미지" />
+                  </a>
+                  <ItemIf>
+                    <p>{shoes.name}</p>
+                    <p>
+                      <Sale>{shoes.sale}</Sale> {PriceCalc(shoes.price)}원
+                    </p>
+                  </ItemIf>
+                </Thumbnail>
+              </Box>
             </Li>
           ))}
         </Ul>

@@ -274,19 +274,45 @@ export function Register() {
   // 비밀번호도 똑같이 오류 표시
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmpassword] = useState("");
+  const [passwordErrorText, setPasswordErrorText] = useState("");
+  const [confirmPasswordErrorText, setConfirmPasswordErrorText] = useState("");
 
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+    const newPassword = event.target.value;
+    setPassword(newPassword);
+  
+    // 비밀번호 유효성 검사
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&*!])[A-Za-z\d@#$%^&*!]{8,20}$/;
+    const isValidPassword = passwordRegex.test(newPassword);
+  
+    // 비밀번호가 조건에 맞지 않는 경우 오류 메시지 설정
+    if (newPassword.length < 8 || !isValidPassword) {
+      setPasswordErrorText("비밀번호는 영문, 숫자, 특수문자를 포함하여 8글자 이상이어야 합니다.");
+      setConfirmPasswordErrorText(""); // 다른 오류가 발생하면 비밀번호 확인 오류 초기화
+    } else {
+      setPasswordErrorText(""); // 조건을 충족할 경우 오류 메시지 초기화
+    }
+  
+    // 비밀번호와 비밀번호 확인 필드가 다른 경우 오류 메시지 설정
+    if (confirmPassword && newPassword !== confirmPassword) {
+      setConfirmPasswordErrorText("비밀번호가 일치하지 않습니다.");
+    } else if (!passwordErrorText) { // 비밀번호 오류가 없을 때만 비밀번호 확인 오류 메시지 초기화
+      setConfirmPasswordErrorText("");
+    }
   };
-
+  
+  // 비밀번호 확인 변경 시
   const handleConfirmPasswordChange = (event) => {
-    setConfirmpassword(event.target.value);
+    const newConfirmPassword = event.target.value;
+    setConfirmpassword(newConfirmPassword);
+  
+    // 비밀번호가 다를 때 오류 메시지 설정
+    if (password !== newConfirmPassword) {
+      setConfirmPasswordErrorText("비밀번호가 일치하지 않습니다.");
+    } else if (!passwordErrorText) { // 비밀번호 오류가 없을 때만 비밀번호 확인 오류 메시지 초기화
+      setConfirmPasswordErrorText("");
+    }
   };
-
-  const passwordsMatch = password === confirmPassword;
-  const passwordErrorText = passwordsMatch
-    ? ""
-    : "비밀번호가 일치하지 않습니다";
 
   // 이메일쪽 오류 표시
   const [email, setEmail] = useState("");
@@ -414,6 +440,19 @@ export function Register() {
                         value={password}
                         onChange={handlePasswordChange}
                       />
+                      {passwordErrorText && (
+  <span
+    style={{
+      color: "#c8002f",
+      fontSize: "13px",
+      margin: "10px 0",
+      padding: "0 0 0 0",
+      letterSpacing: "-0.5px",
+    }}
+  >
+    {passwordErrorText}
+  </span>
+)}
                     </Labelpl>
                     <Labelpl>
                       <Input
@@ -422,19 +461,19 @@ export function Register() {
                         value={confirmPassword}
                         onChange={handleConfirmPasswordChange}
                       />
-                      {!passwordsMatch && (
-                        <span
-                          style={{
-                            color: "#c8002f",
-                            fontSize: "13px",
-                            margin: "10px 0",
-                            padding: "0 0 0 0",
-                            letterspacing: " -0.5px",
-                          }}
-                        >
-                          {passwordErrorText}
-                        </span>
-                      )}
+                      {confirmPasswordErrorText && (
+  <span
+    style={{
+      color: "#c8002f",
+      fontSize: "13px",
+      margin: "10px 0",
+      padding: "0 0 0 0",
+      letterSpacing: "-0.5px",
+    }}
+  >
+    {confirmPasswordErrorText}
+  </span>
+)}
                     </Labelpl>
                   </Jointd>
                 </Jointr>

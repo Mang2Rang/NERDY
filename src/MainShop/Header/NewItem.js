@@ -1,16 +1,18 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getAllProducts } from "../Api/api";
+import { getAllNewItems } from "../Api/api";
+import { PriceCalc } from "../Body/PriceCalc";
 
 const Container = styled.div`
-  width: calc(100vw-10px);
   min-width: 1200px;
   max-width: 1400px;
   margin: 0 auto;
+  min-height: calc(100% - 298px);
+  position: relative;
 `;
 
-const BestItemBanner = styled.div`
+const NewItemBanner = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
@@ -18,17 +20,23 @@ const BestItemBanner = styled.div`
   margin-bottom: 50px;
   img {
     width: 100%;
-
     height: 400px;
-
     object-fit: cover;
   }
 `;
 const Ul = styled.div`
   width: 100%;
-  height: 500px;
+  height: 100%;
+  margin-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
+`;
+const Li = styled.li`
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  flex: 0 0 20%;
+  padding: 0 0 80px 0;
 `;
 const ItemText = styled.div`
   color: black;
@@ -40,43 +48,49 @@ const ItemText = styled.div`
 `;
 const Thumbnail = styled.div`
   position: relative;
-  width: 244px;
+  width: 230px;
   margin-top: 30px;
   img {
     width: 100%;
-    height: 283px;
   }
 `;
 const BestNum = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-
   width: 40px;
   height: 35px;
   background-color: black;
   color: white;
   font-size: 12px;
   font-weight: 900;
-
   align-items: center;
   flex-direction: column;
   text-align: center;
 `;
-const Li = styled.div``;
 const ItemIf = styled.div`
-  p {
-    display: flex;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+`;
+const Txt = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const Coast = styled.div`
+  display: flex;
+  gap: 0.5rem;
 `;
 const Sale = styled.div`
   color: red;
 `;
+const Price = styled.div``;
 const ItemTitle = styled.div`
   color: black;
   font-size: 14px;
   display: flex;
-
   gap: 30px;
   h1 {
     font-size: 40px;
@@ -90,11 +104,11 @@ const ItemTitle = styled.div`
 `;
 
 export function NewItem() {
-  const [productList, setProductList] = useState([]);
+  const [newitemList, setNewItemList] = useState([]);
 
   useEffect(() => {
-    getAllProducts().then((products) => {
-      setProductList(products);
+    getAllNewItems().then((newitem) => {
+      setNewItemList(newitem);
     });
   }, []);
   return (
@@ -104,25 +118,25 @@ export function NewItem() {
           <h1>23FW 신상품</h1>
           <strong>전체</strong>
         </ItemTitle>
-        <BestItemBanner>
+        <NewItemBanner>
           <img
             src="https://www.whoisnerdy.com/web/upload/event/2023/editorial_01.png?ver=2"
             alt=""
           />
-        </BestItemBanner>
+        </NewItemBanner>
         <ItemText>
-          <p>{productList.length}개의 상품이 있습니다</p>
+          <p>{newitemList.length}개의 상품이 있습니다</p>
         </ItemText>
         <Ul>
-          {productList.map((product, index) => (
-            <Li key={product.id}>
+          {newitemList.map((newitem, index) => (
+            <Li key={newitem.id}>
               <Thumbnail>
                 <NavLink
                   to="/item"
                   style={{ textDecoration: "none", color: "black" }}
                 >
-                  <a href={product.link}>
-                    <img src={product.mainimg} alt="이미지" />
+                  <a href={newitem.link}>
+                    <img src={newitem.mainimg} alt="이미지" />
                   </a>
                 </NavLink>
                 <BestNum>
@@ -130,11 +144,14 @@ export function NewItem() {
                   <p>{index + 1}</p>
                 </BestNum>
                 <ItemIf>
-                  <p>★ 평점</p>
-                  <p>{product.name}</p>
-                  <p>
-                    <Sale>{product.sale}%</Sale> ~원
-                  </p>
+                  <Txt>
+                    <p>★ 평점</p>
+                    <p>{newitem.name}</p>
+                  </Txt>
+                  <Coast>
+                    <Sale>{newitem.sale}</Sale>
+                    <Price>{PriceCalc(newitem.price)}원</Price>
+                  </Coast>
                 </ItemIf>
               </Thumbnail>
             </Li>

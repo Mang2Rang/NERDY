@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import {SlideBox2} from "../SlideBox2";
+import { SeasonLBSlide} from "../SlideBox/SeasonLBSlide";
 
 const Container = styled.div`
-  height: 80%;   
+   height: 900px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 `;
 
 const GoNewItem = styled.div`
@@ -27,7 +30,7 @@ export function SeasonLb() {
   return (
     <>
       <Container>
-      <SlideBox2 />
+      <SeasonLBSlide />
         <GoNewItem>
           <NavLink
             to="/NewItem"

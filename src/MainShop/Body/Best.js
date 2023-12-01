@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const StyledDiv = styled.div`
   position: relative;
+  margin-top:-4px;
   width: 100%;
   height: 100%;
   img {

@@ -4,8 +4,8 @@ import styled from "styled-components";
 // 슬라이드 한개의 크기를 여기서 세팅함(px)
 // 화면 전체는 window.innerWidth, window.innerHeight를 사용
 const WIDTH = 1897;
-const HEIGHT = 600;
 const DRAG_THRESHOLD = 20; // 일정 거리 이상 이동해야 슬라이드를 넘김
+const PageCount = 13; //표시할 페이지 수
 
 // 화면전체. 슬라이드 컨테이너를 화면 가운데 배치
 const Wrapper = styled.div`
@@ -46,43 +46,68 @@ const Page = styled.div`
   top: 0;
   z-index: 1;
 `;
+const PageWrapper = styled(Page)`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+`;
 // StatusBar ( 슬라이드 전체 범위 표시 바)
 const StatusBar = styled.div`
   width: 100%;
-  height: 10px;
+  height: 8px;
   background: #000000;
-  opacity:0.8;
+  opacity: 0.8;
   position: absolute;
   bottom: 0;
   z-index: 2;
-  
 `;
 
 // InnerBar (이동하는 바)
 const InnerBar = styled.div`
   height: 100%;
   background: darkgrey;
-  //수동계산이 아닌 StatusBar의 Width 값에서 Page갯수 만큼 나눈값이 InnerBar의 width 값이 되도록 변경해야함.
-  width: 412px;
+  width: calc(100% / ${PageCount}); // InnerBar의 너비
   transition: transform 0.5s ease;
   z-index: 3;
   //InnerBar.width * CurrentPage 로 변경이 필요함.
-  transform: translateX(${(props) => `calc(412px * (${props.currentPage}))`});
+  transform: translateX(${(props) => `calc(127px * ${props.currentPage})`});
 `;
 
 const Img = styled.img`
   height: 100%;
 `;
 
-export function SlideBox() {
-  const pageList = [Page1, Page2, Page3, Page4,Page5,Page6,Page7,Page8,Page9,Page10,Page11,Page12,Page13];
+const PageNumber = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 35px;
+  text-align: center;
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+`;
+
+export function The8LBSlide() {
+  const pageList = Array.from({ length: PageCount }).map((_, index) => (
+    <CreatePage
+      key={index}
+      index={index}
+      left={index * WIDTH} //페이지의 인덱스에따라 왼쪽위치 조절
+      imgUrl={`https://whoisnerdy.com/web/upload/event/2023/the8_${String(
+        index + 1
+      ).padStart(2, "0")}.png?ver=2`}
+    />
+  ));
   const [slideX, setSlideX] = useState(0);
   const [currentPage, SetCurrentPage] = useState(0);
   const dragStartX = useRef(null);
   const isDragging = useRef(false);
   const pageWidth = WIDTH; // 각 페이지의 너비
   const totalPageCount = pageList.length;
-  /* const isAutoSlide = useRef(false); */
 
   // 페이지 순환 함수
   const getNextPage = useCallback(
@@ -135,6 +160,7 @@ export function SlideBox() {
   }
 
   function handleDragMove(e) {
+    e.preventDefault(); // 드래그 중 기본 동작을 막음
     if (isDragging.current) {
       const distance = e.clientX - dragStartX.current;
       if (Math.abs(distance) > DRAG_THRESHOLD) {
@@ -162,186 +188,28 @@ export function SlideBox() {
           onMouseMove={handleDragMove}
           onMouseUp={handleDragEnd}
         >
-          {pageList.map((Page, i) => (
-            <Slide key={i} style={{ transform: `translateX(${slideX}px)` }}>
-              {/* 변경된 부분: Page1에서 왼쪽으로 슬라이드할 때 Page4로 이동 */}
-              {i === getPrevPage(Page1) && (
-                <Page4 key={i} left={pageWidth * i} />
-              )}
-              <Page key={i} left={pageWidth * i} />
-            </Slide>
-          ))}
-              <StatusBar>
+          <Slide style={{ transform: `translateX(${slideX}px)` }}>
+            {pageList}
+          </Slide>
+          <StatusBar>
             {/*InnerBar의 width를 현재 페이지 1개분으로 설정 */}
             <InnerBar currentPage={currentPage} />
           </StatusBar>
         </Container>
-        {/* 좌우 버튼 구현부 */}
-        {/* <Btn1 onClick={handleLeftBtn}>LEFT</Btn1>
-        <Btn2 onClick={handleRightBtn}>RIGHT</Btn2> */}
       </Wrapper>
+      <PageNumber>
+        <span>{currentPage + 1}</span>
+        <span>/</span>
+        <span>{pageList.length}</span>
+      </PageNumber>
     </>
   );
 }
 
-//개념적으로는  Page를 생성하는 함수 생성 
-//반복문을 통해 i가 증가하면서 Page 생성 Img 는 DataBase에 src를 불러와 입력
-//PageList에 순차적으로 생선된 Page가 자동으로 들어가게 구현해야 될듯
-//현재는 시간 관계상 단순히 직접적으로 각 Page를 생선 비효율적
-
-function Page1({ left }) {
+function CreatePage({ index, left, imgUrl }) {
   return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/the8_01.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
-  );
-}
-function Page2({ left }) {
-  return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/the8_02.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
-  );
-}
-function Page3({ left }) {
-  return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/the8_03.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
-  );
-}
-function Page4({ left }) {
-  return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/the8_04.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
-  );
-}
-function Page5({ left }) {
-  return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/the8_05.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
-  );
-}
-function Page6({ left }) {
-  return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/the8_06.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
-  );
-}
-function Page7({ left }) {
-  return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/the8_07.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
-  );
-}
-function Page8({ left }) {
-  return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/the8_08.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
-  );
-}
-function Page9({ left }) {
-  return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/the8_09.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
-  );
-}
-function Page10({ left }) {
-  return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/the8_10.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
-  );
-}
-function Page11({ left }) {
-  return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/the8_11.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
-  );
-}
-function Page12({ left }) {
-  return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/the8_12.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
-  );
-}
-function Page13({ left }) {
-  return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/the8_13.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
+    <PageWrapper $left={left} key={index}>
+      <Img src={imgUrl} alt="" />
+    </PageWrapper>
   );
 }

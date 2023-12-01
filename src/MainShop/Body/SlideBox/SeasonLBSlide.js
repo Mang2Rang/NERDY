@@ -4,8 +4,8 @@ import styled from "styled-components";
 // 슬라이드 한개의 크기를 여기서 세팅함(px)
 // 화면 전체는 window.innerWidth, window.innerHeight를 사용
 const WIDTH = 1897;
-const HEIGHT = 600;
 const DRAG_THRESHOLD = 20; // 일정 거리 이상 이동해야 슬라이드를 넘김
+const PageCount = 19;
 
 // 화면전체. 슬라이드 컨테이너를 화면 가운데 배치
 const Wrapper = styled.div`
@@ -46,34 +46,61 @@ const Page = styled.div`
   top: 0;
   z-index: 1;
 `;
+const PageWrapper = styled(Page)`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+`;
 // StatusBar ( 슬라이드 전체 범위 표시 바)
 const StatusBar = styled.div`
   width: 100%;
-  height: 10px;
+  height: 8px;
   background: #000000;
-  opacity:0.8;
+  opacity: 0.8;
   position: absolute;
   bottom: 0;
   z-index: 2;
-  
 `;
 
 // InnerBar (이동하는 바)
 const InnerBar = styled.div`
   height: 100%;
-  background: darkgrey;  
-  width: 412px;
+  background: darkgrey;
+  width: calc(100% / ${PageCount}); // InnerBar의 너비
   transition: transform 0.5s ease;
   z-index: 3;
-  transform: translateX(${(props) => `calc(412px * (${props.currentPage}))`});
+  //InnerBar.width * CurrentPage 로 변경이 필요함.
+  transform: translateX(${(props) => `calc(127px * ${props.currentPage})`});
+`;
+const PageNumber = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 35px;
+  text-align: center;
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
 `;
 
 const Img = styled.img`
   height: 100%;
 `;
 
-export function SlideBox2() {
-  const pageList = [Page1, Page2, Page3, Page4];
+export function SeasonLBSlide() {
+  const pageList = Array.from({ length: PageCount }).map((_, index) => (
+    <CreatePage
+      key={index}
+      index={index}
+      left={index * WIDTH} //페이지의 인덱스에따라 왼쪽위치 조절
+      imgUrl={`https://whoisnerdy.com/web/upload/event/2023/editorial_${String(
+        index + 1
+      ).padStart(2, "0")}.png?ver=2`}
+    />
+  ));
   const [slideX, setSlideX] = useState(0);
   const [currentPage, SetCurrentPage] = useState(0);
   const dragStartX = useRef(null);
@@ -133,6 +160,7 @@ export function SlideBox2() {
   }
 
   function handleDragMove(e) {
+    e.preventDefault(); // 드래그 중 기본 동작을 막음
     if (isDragging.current) {
       const distance = e.clientX - dragStartX.current;
       if (Math.abs(distance) > DRAG_THRESHOLD) {
@@ -160,73 +188,28 @@ export function SlideBox2() {
           onMouseMove={handleDragMove}
           onMouseUp={handleDragEnd}
         >
-          {pageList.map((Page, i) => (
-            <Slide key={i} style={{ transform: `translateX(${slideX}px)` }}>
-              {/* 변경된 부분: Page1에서 왼쪽으로 슬라이드할 때 Page4로 이동 */}
-              {i === getPrevPage(Page1) && (
-                <Page4 key={i} left={pageWidth * i} />
-              )}
-              <Page key={i} left={pageWidth * i} />
-            </Slide>
-          ))}
-              <StatusBar>
+          <Slide style={{ transform: `translateX(${slideX}px)` }}>
+            {pageList}
+          </Slide>
+          <StatusBar>
             {/*InnerBar의 width를 현재 페이지 1개분으로 설정 */}
             <InnerBar currentPage={currentPage} />
           </StatusBar>
         </Container>
-        {/* 좌우 버튼 구현부 */}
-        {/* <Btn1 onClick={handleLeftBtn}>LEFT</Btn1>
-        <Btn2 onClick={handleRightBtn}>RIGHT</Btn2> */}
       </Wrapper>
+      <PageNumber>
+        <span>{currentPage + 1}</span>
+        <span>/</span>
+        <span>{pageList.length}</span>
+      </PageNumber>
     </>
   );
 }
 
-function Page1({ left }) {
+function CreatePage({ index, left, imgUrl }) {
   return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/editorial_01.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
-  );
-}
-function Page2({ left }) {
-  return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/editorial_02.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
-  );
-}
-function Page3({ left }) {
-  return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/editorial_03.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
-  );
-}
-function Page4({ left }) {
-  return (
-    <>
-      <Page $left={left}>
-        <Img
-          src="https://whoisnerdy.com/web/upload/event/2023/editorial_04.png?ver=2"
-          alt=""
-        />
-      </Page>
-    </>
+    <PageWrapper $left={left} key={index}>
+      <Img src={imgUrl} alt="" />
+    </PageWrapper>
   );
 }

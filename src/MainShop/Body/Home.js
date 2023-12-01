@@ -2,9 +2,9 @@ import { Best } from "./Best";
 import { New } from "./New";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { MainBanner } from "./MainBanner";
 import { SlideItem } from "./SlideItem";
 import { SlideFooterBar } from "../Footer/SlideFooterBar";
+import { MBSlide} from "./SlideBox/MBSlide";
 
 const Container = styled.div`
   width: calc(100%);
@@ -24,7 +24,7 @@ export function Home() {
     <>
       <Container>
         <StyledMainBanner>
-          <MainBanner />
+        <MBSlide/>
         </StyledMainBanner>
         <SlideItem />
         <StyledMain>

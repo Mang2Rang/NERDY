@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import { createContext, useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./Body/Home";
@@ -21,22 +21,20 @@ import { LookBookRoutes } from "./Header/LookBook";
 import { Community } from "./Header/Community";
 import { The8 } from "./Header/The8";
 import { ScrollTop } from "./Header/ScrollTop";
-import { getAllProducts } from "./Api/api";
+import { Logout } from "./Header/Logout";
 
 // 글로벌 세팅 구현
 
 const client = new QueryClient();
 export const MyContext = createContext();
 
+
 export function NerdyShop() {
   const [myGlobalState, setMyGlobalState] = useState(null);
-  const [productsList, setProductsList] = useState([]);
+  const [loginState, setLoginState] =useState(
+    JSON.parse(localStorage.getItem("loginState"))
+  );
 
-  useEffect(() => {
-    getAllProducts().then((products) => {
-      setProductsList(products);
-    });
-  }, []);
 
   return (
     <>
@@ -45,8 +43,8 @@ export function NerdyShop() {
           value={{
             myGlobalState,
             setMyGlobalState,
-            // productsList,
-            // setProductsList,
+            loginState,
+            setLoginState
           }}
         >
           <BrowserRouter>
@@ -65,6 +63,7 @@ export function NerdyShop() {
                 <Route path="community" element={<Community />} />
                 <Route path="search" element={<Search />} />
                 <Route path="login" element={<Login />} />
+                <Route path="logout" element={<Logout />} />
                 <Route path="register" element={<Register />} />
                 <Route path="cart" element={<Cart />} />
                 <Route path="gift" element={<Gift />} />

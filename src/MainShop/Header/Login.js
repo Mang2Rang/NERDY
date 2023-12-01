@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { useContext, useState, useEffect } from "react";
-import { useQuery } from "react-query";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "react-query";
 import { login } from "../Api/api";
-// import { MyContext } from "../NerdyShop";
+import { MyContext } from "../NerdyShop";
 /**
  * @typeof {Object} CheckProps;
  * @property {boolean} isChecked;
@@ -316,145 +316,153 @@ export function Login() {
   const handleCheck = () => {
     setIsChecked(!isChecked);
   };
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [userLogin, setUserLogin] = useState("");
-  // const [loggingIn, setLoggingIn] = useState(false);
-  // const { loginState, setLoginState } = useContext();
-  // const navigate = useNavigate();
-  // const { data, isLoading, refetch } = useQuery(
-  //   "login",
-  //   () => {
-  //     if (userLogin) {
-  //       setLoggingIn(true);
-  //       return login(userLogin);
-  //     }
-  //   },
-  //   { retry: 0 }
-  // );
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [userLogin, setUserLogin] = useState(null);
+  const [loggingIn, setLoggingIn] = useState(false);
+  const { loginState, setLoginState } = useContext(MyContext);
+  const navigate = useNavigate();
+  const { data, isLoading, refetch } = useQuery(
+    "login",
+    () => {
+      if (userLogin) {
+        setLoggingIn(true);
+        return login(userLogin);
+      }
+    },
+    { retry: 0 }
+  );
 
-  // useEffect(() => {
-  //   if (data && data.resultCode === "SUCCESS" && userLogin) {
-  //     console.log(data);
-  //     localStorage.setItem(
-  //       "loginState",
-  //       JSON.stringify({ id: userLogin.loginId })
-  //     );
-  //     setLoginState({ id: userLogin.loginId });
-  //     setTimeout(() => {
-  //       navigate("/Mypage");
-  //       setLoggingIn(false);
-  //     }, 1000);
-  //   } else if (data && data.resultCode === "ERROR") {
-  //     console.log(data);
-  //     navigate("/login");
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    if (data) {
+      if (data.resultCode === "SUCCES" && userLogin) {
+        console.log(data);
+        localStorage.setItem(
+          "loginState",
+          JSON.stringify({ id: userLogin.username })
+        );
+        setLoginState({ id: userLogin.username });
+        navigate("/");
+      } else if (data.resultCode === "ERROR") {
+        navigate("/login");
+      }
+      setLoggingIn(false);
+    }
+  }, [data]);
 
-  // useEffect(() => {
-  //   refetch();
-  // }, [userLogin]);
+  console.log(loggingIn);
+  useEffect(() => {
+    refetch();
+  }, [userLogin]);
 
-  // function onSubmit(e) {
-  //   e.preventDefault();
-  //   const user = {
-  //     username: username,
-  //     password: password,
-  //   };
-  //   setUserLogin(user);
-  // }
+  function onSubmit(e) {
+    e.preventDefault();
+    const user = {
+      username: username,
+      password: password,
+    };
+    setUserLogin(user);
+  }
   return (
     <>
-      {/* {loggingIn ? (
+      {loggingIn ? (
         <h1>로그인중입니다... </h1>
       ) : loginState?.id ? (
         <h1> 이미 로그인되어 있습니다. {loginState.id}</h1>
-      ) : ( */}
-      
+      ) : (
         <>
-      <Container>
-        <Content>
-          <Loginbar>
-            <Logintitle>로그인</Logintitle>
-            <Filedset>
-              <FormBox>
-                <Form /*onSubmit={onSubmit}*/>
-                  <Eplaceholder>
-                    <Input
-                      // placeholder="아이디"
-                      // id="loginId"
-                      // value={username}
-                      // onChange={(e) => setUsername(e.target.value)}
+          <Container>
+            <Content>
+              <Loginbar>
+                <Logintitle>로그인</Logintitle>
+                <Filedset>
+                  <FormBox>
+                    <form onSubmit={onSubmit}>
+                      <Eplaceholder>
+                        <Input
+                          placeholder="아이디"
+                          id="username"
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <Input
+                          placeholder="비밀번호"
+                          id="password"
+                          value={password}
+                          type="password"
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
+                      </Eplaceholder>
+                      <Btnbox>
+                        <Button type="submit">로그인 하기</Button>
+                      </Btnbox>
+                    </form>
+                    <Findinfo>
+                      <Security>
+                        <HiddenCheckbox
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={handleCheck}
+                          id="checkboxId"
+                        />
+                        <Check isChecked={isChecked} onClick={handleCheck} />
+                        <Membercheck
+                          htmlFor="checkboxId"
+                          onClick={() => handleCheck()}
+                        >
+                          자동 로그인
+                        </Membercheck>
+                      </Security>
+                      <Typelogin>
+                        <Notmember>비회원 주문조회</Notmember>
+                        <Findidpass>ID/PW찾기</Findidpass>
+                      </Typelogin>
+                    </Findinfo>
+
+                    <Joinbox>
+                      <Joinspace>
+                        <Join href="/register">
+                          <text>일반 회원가입</text>
+                        </Join>
+                      </Joinspace>
+                    </Joinbox>
+                    <Typelogin />
+                  </FormBox>
+                </Filedset>
+                <Orwrap>
+                  <Or>또는</Or>
+                </Orwrap>
+                <SnsSync>
+                  <KaKaologin href="#none">
+                    <img
+                      src="https://whoisnerdy.com/web/upload/icon/ico_kakao.png"
+                      alt=""
                     />
-                    <Input
-                      placeholder="비밀번호"
-                      // id="password"
-                      // value={password}
-                      // type="password"
-                      // onChange={(e) => setPassword(e.target.value)}
+                    &nbsp;
+                    <span>카카오</span>
+                  </KaKaologin>
+                  <Naverlogin href="#none">
+                    <img
+                      src="https://whoisnerdy.com/web/upload/icon/ico_naver.png"
+                      alt=""
                     />
-                  </Eplaceholder>
-                </Form>
-                <Findinfo>
-                  <Security>
-                    <HiddenCheckbox
-                      type="checkbox"
-                      checked={isChecked}
-                      onChange={handleCheck}
-                      id="checkboxId"
+                    &nbsp;
+                    <span>네이버</span>
+                  </Naverlogin>
+                  <Applelogin href="#none">
+                    <img
+                      src="https://whoisnerdy.com/web/upload/icon/ico_apple.png"
+                      alt=""
                     />
-                    <Check isChecked={isChecked} onClick={handleCheck} />
-                    <Membercheck
-                      htmlFor="checkboxId"
-                      onClick={() => handleCheck()}
-                    >
-                      자동 로그인
-                    </Membercheck>
-                  </Security>
-                  <Typelogin>
-                    <Notmember>비회원 주문조회</Notmember>
-                    <Findidpass>ID/PW찾기</Findidpass>
-                  </Typelogin>
-                </Findinfo>
-                <Btnbox>
-                  <Button type="submit">로그인 하기</Button>
-                </Btnbox>
-                <Joinbox>
-                  <Joinspace>
-                    <Join href="/register">
-                      <text>일반 회원가입</text>
-                    </Join>
-                  </Joinspace>
-                </Joinbox>
-                <Typelogin />
-              </FormBox>
-            </Filedset>
-            <Orwrap>
-              <Or>또는</Or>
-            </Orwrap>
-            <SnsSync>
-              <KaKaologin href="#none">
-                <img src="https://whoisnerdy.com/web/upload/icon/ico_kakao.png" />
-                &nbsp;
-                <span>카카오</span>
-              </KaKaologin>
-              <Naverlogin href="#none">
-                <img src="https://whoisnerdy.com/web/upload/icon/ico_naver.png" />
-                &nbsp;
-                <span>네이버</span>
-              </Naverlogin>
-              <Applelogin href="#none">
-                <img src="https://whoisnerdy.com/web/upload/icon/ico_apple.png" />
-                &nbsp;
-                <span>애플</span>
-              </Applelogin>
-            </SnsSync>
-          </Loginbar>
-        </Content>
-      </Container>
+                    &nbsp;
+                    <span>애플</span>
+                  </Applelogin>
+                </SnsSync>
+              </Loginbar>
+            </Content>
+          </Container>
+        </>
+      )}
     </>
-          {/* )
-      } */}
-     </>
   );
 }

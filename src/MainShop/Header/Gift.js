@@ -28,8 +28,8 @@ export function Gift() {
   return (
     <>
       <Container>
-        <img src="https://www.whoisnerdy.com/web/upload/images/mbs_01.jpg?ver=2" />
-        <img src="https://www.whoisnerdy.com/web/upload/images/mbs_02-1.jpg?ver=4" />
+        <img src="https://www.whoisnerdy.com/web/upload/images/mbs_01.jpg?ver=2" alt=""/>
+        <img src="https://www.whoisnerdy.com/web/upload/images/mbs_02-1.jpg?ver=4" alt=""/>
         <GoLoginBtn>
           <NavLink
             to="/login"
@@ -38,7 +38,7 @@ export function Gift() {
             <button>회원가입 하러가기</button>
           </NavLink>
         </GoLoginBtn>
-        <img src="https://www.whoisnerdy.com/web/upload/images/mbs_05.jpg" />
+        <img src="https://www.whoisnerdy.com/web/upload/images/mbs_05.jpg" alt=""/>
       </Container>
     </>
   );

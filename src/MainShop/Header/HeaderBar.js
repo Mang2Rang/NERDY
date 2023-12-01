@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 import { SnapBody } from "../Body/SnapBody";
-import React, { useState } from "react";
-import { Membership } from "../Header/Membership";
-import { Mypage } from "../Header/Mypage";
-import { Register } from "../Header/Register";
+import React, { useContext, useState } from "react";
+import { MyContext } from "../NerdyShop";
 
 const Container = styled.div`
   position: sticky;
@@ -149,6 +147,8 @@ export function HeaderBar() {
     setIsLoggedIn((prevIsLoggedIn) => !prevIsLoggedIn);
     setIsRegisterVisible(true);
   };
+
+  const {loginState} = useContext(MyContext);
   return (
     <>
       <Container>
@@ -211,6 +211,8 @@ export function HeaderBar() {
         <RightMenu>
           {/* 상단 */}
           <RUl>
+            {!loginState ?(
+              <>
             <RLi>
               <NavLink
                 to="/login"
@@ -227,8 +229,16 @@ export function HeaderBar() {
                 멤버쉽가입
               </NavLink>
             </RLi>
-          </RUl>
+            </>
+            ) : (
 
+          <RUl>
+          <NavLink to="/logout" style={{textDecoration:"none", color:"#999"}}>
+            로그아웃
+          </NavLink>
+          </RUl>
+          )}
+          </RUl>
           <ICON>
             <a href="/search">
               <img

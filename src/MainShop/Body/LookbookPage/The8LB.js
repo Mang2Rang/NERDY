@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import {SlideBox} from "../SlideBox";
+import { The8LBSlide } from "../SlideBox/The8LBSlide";
 import { NavLink } from "react-router-dom";
 
 const Container = styled.div`
-  height: 80%;   
-  /* min-width: 1200px; */
+  height: 900px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 `;
 
 const Gothe8 = styled.div`
@@ -28,7 +30,7 @@ export function The8LB() {
   return (
     <>
       <Container>
-        <SlideBox />
+        <The8LBSlide />
         <Gothe8>
           <NavLink
             to="/the8"

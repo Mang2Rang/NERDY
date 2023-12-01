@@ -118,7 +118,7 @@ export function Item() {
         <Ul>
           <Li>★ 평점</Li>
           <Li>{product.name}</Li>
-          <Li>{product.price}</Li>
+          <Li>{product.price}원</Li>
         </Ul>
         <Ul>
           <Li>

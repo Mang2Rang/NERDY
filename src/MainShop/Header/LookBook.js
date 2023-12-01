@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { The8LB } from "../Body/LookbookPage/The8LB";
@@ -13,11 +13,11 @@ import { getAllLookbooks } from "../Api/api";
 const Container = styled.div`
   width: 1200px;
   min-width: 1200px;
-  min-height: 100%;
   min-height: calc(100% - 298px);
   margin: 0 auto;
   padding: 33px 0 0 0;
   position: relative;
+  overflow: hidden;
 `;
 
 const LbTitle = styled.div`
@@ -71,7 +71,11 @@ const LookbookBox = styled.div`
     height: 288px;
     border-radius: 5px;
     margin-bottom: 14px;
-  }
+    transition: 0.5s;
+    &:hover{
+      transform: scale(1.1);
+    }
+  }  
 `;
 
 

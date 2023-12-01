@@ -1,9 +1,13 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { getAllThe8s } from "../Api/api";
 
 const Container = styled.div`
   width: calc(100vw-10px);
   min-width: 1200px;
   max-width: 1400px;
+  min-height: calc(100% - 298px);
+  overflow: hidden;
   margin: 0 auto;
 `;
 
@@ -19,9 +23,16 @@ const BestItemBanner = styled.div`
     object-fit: cover;
   }
 `;
-const Ul = styled.div`
-  width: 100%;
-  height: 500px;
+const Ul = styled.ul`
+  margin: 0 -10px;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+`;
+const Li = styled.li`
+flex: 0 0 20%;
+padding: 0 0 80px 0;
+list-style: none;
 `;
 const ItemTitle = styled.div`
   color: black;
@@ -48,37 +59,48 @@ const ItemText = styled.div`
   font-size: 14px;
 `;
 const Thumbnail = styled.div`
-  margin-top: 30px;
+  position: relative;
+  margin: 0 0 0 0;
+  overflow: hidden;
+  a {
+    text-decoration: none;
+    color: #000;
+  }
   img {
+    border: 0;
     width: 100%;
-    height: 400px;
+    vertical-align: top;
   }
 `;
-const BestNum = styled.div`
-  width: 40px;
-  height: 35px;
-  background-color: black;
-  color: white;
-  font-size: 12px;
-  font-weight: 900;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`;
-const Li = styled.div``;
+
 const ItemIf = styled.div`
   p {
-    display: flex;
+    position: relative;
+    text-align: center;
+    padding: 14px 0 0 0;
+    font-size: 15px;
   }
 `;
 const Sale = styled.div`
+ display: inline-block;
+  font-size: 15px;
+  font-weight: 500;
+  margin-right: 2px;
   color: red;
 `;
 
+const Box = styled.div`
+padding: 0 10px;
+overflow: hidden;
+`;
 export function The8() {
-  const productList = [
-    /* 리스트에 상품 정보를 추가하세요 */
-  ];
+  const [the8List, setThe8List] = useState([]);
+
+  useEffect(()=>{
+    getAllThe8s().then((the8)=>{
+      setThe8List(the8);
+    })
+  })
   return (
     <>
       <Container>
@@ -97,27 +119,24 @@ export function The8() {
           />
         </BestItemBanner>
         <ItemText>
-          <p>{productList.length}개의 상품이 있습니다</p>
+          <p>{the8List.length}개의 상품이 있습니다</p>
         </ItemText>
         <Ul>
-          {productList.map((product, index) => (
-            <Li key={index}>
+          {the8List.map((the8, index) => (
+            <Li key={the8.id}>
+              <Box>
               <Thumbnail>
-                <a href={product.link}>
-                  <img src={product.imageUrl} alt="이미지" />
+                <a href={the8.link}>
+                  <img src={the8.mainimg} alt="이미지" />
                 </a>
-                <BestNum>
-                  <p>Best</p>
-                  <p>{index + 1}</p>
-                </BestNum>
                 <ItemIf>
-                  <p>★ 평점</p>
-                  <p>{product.name}</p>
+                  <p>{the8.name}</p>
                   <p>
-                    <Sale>{product.salePercentage}</Sale> ~원
+                    <Sale>{the8.sale}</Sale> {the8.price}원
                   </p>
                 </ItemIf>
               </Thumbnail>
+              </Box>
             </Li>
           ))}
         </Ul>

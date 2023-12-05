@@ -1,20 +1,19 @@
-import React, { useRef, useState } from "react";
+// import required modules
+import { Autoplay, FreeMode } from "swiper/modules";
+import styled from "styled-components";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-
-// import "../Style/SlideItem_styles.css";
-
-// import required modules
-import { Autoplay, Navigation, FreeMode } from "swiper/modules";
-import styled from "styled-components";
-
 const Container = styled.div`
   background: #f9fafd;
+  height: 100%;
+  overflow: hidden;
+  .swiper-wrapper {
+    transition-timing-function: linear;
+    img {
+      width: 100%;
+    }
+  }
 `;
 const Notice = styled.div`
   display: flex;
@@ -42,24 +41,14 @@ export function SlideItem() {
           스와이프하여 원하는 제품을 골라보세요.
         </Notice>
         <Swiper
+          id="SlideItem_Swiper"
           slidesPerView={5}
           spaceBetween={0.1}
           centeredSlides={true}
-          speed={1500}
-          autoplay={{
-            delay: 0,
-            disableOnInteraction: false,
-          }}
-          navigation={false}
-          modules={[FreeMode, Autoplay, Navigation]}
           loop={true}
-          //마우스 드래그 시 발생하는 빈공간 해결 구문
-          freeMode={true}
-          freeModeMomentum={true}
-          freeModeSticky={true}
-          freeModeMomentumVelocityRatio={0.1}
-          freeModeMinimumVelocity={0.1}
-          id="SlideItem_Swiper"
+          speed={5000}
+          autoplay={{ delay: 0, disableOnInteraction: false }}
+          modules={[Autoplay]}
         >
           <SwiperSlide>
             <img

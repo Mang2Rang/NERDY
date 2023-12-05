@@ -43,20 +43,21 @@ const Content = styled.div`
   overflow: hidden;
 `;
 const UI = styled.ul`
-width: 1230px;
-margin-top: -25px;
-margin-left: -15px;
-display: flex;
-flex-wrap: wrap;
-list-style: none;
+  width: 1230px;
+  margin-top: -25px;
+  margin-left: -15px;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
 `;
 const LI = styled.li`
-position: relative;
-margin: 28px 15px;
-width: 380px;
-list-style: none;
-`
+  position: relative;
+  margin: 28px 15px;
+  width: 380px;
+  list-style: none;
+`;
 const LookbookBox = styled.div`
+  position: relative;
   h3 {
     font-size: 24px;
     font-weight: 500;
@@ -67,26 +68,67 @@ const LookbookBox = styled.div`
     font-weight: 600;
   }
   img {
+    position: relative;
     width: 380px;
     height: 288px;
     border-radius: 5px;
     margin-bottom: 14px;
     transition: 0.5s;
-    &:hover{
+  }
+`;
+const ImgWrapper = styled.div`
+  margin-bottom: 18px;
+  height: 288px;
+  width: 380px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+  &:hover {
+    img {
       transform: scale(1.1);
     }
-  }  
+  }
 `;
 
+const EndEvent = styled.div`
+  position: absolute;
+  z-index: 1000;
+  right: 0;
+  top: 0;
+  width: 95px;
+  height: 56px;
+  box-sizing: border-box;
+  font-size: 19.4px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 56px;
+  letter-spacing: -1px;
+  text-align: center;
+  background: rgba(0, 0, 0, 1);
+  color: #ffffff;
+`;
+
+const Fog = styled.div`
+  transition: 0.5s;
+  cursor: pointer;
+  position: absolute;
+  height: 288px;
+  width: 380px;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+`;
 
 export function LookBook() {
   const [lookbookList, setLookbookList] = useState([]);
 
-  useEffect(()=>{
-    getAllLookbooks().then((lookbook) =>{
+  useEffect(() => {
+    getAllLookbooks().then((lookbook) => {
       setLookbookList(lookbook);
-    })
-  },[])
+    });
+  }, []);
   return (
     <>
       <Container>
@@ -98,26 +140,27 @@ export function LookBook() {
         </LbTitle>
         <Content>
           <UI>
-            {lookbookList.map((lookbook,index)=>(
-            <LI key={lookbook.id}>
-          <LookbookBox>
-            <NavLink
-              to={lookbook.path}
-              style={{ textDecoration: "none", color: "black" }}
-            >
-              <img
-                src={lookbook.img}
-                alt="이미지"
-              />
-            </NavLink>
-            <h3>{lookbook.title}</h3>
-            <p>{lookbook.date}</p>
-          </LookbookBox>
-          </LI>
-        ))}
-        </UI>
+            {lookbookList.map((lookbook, index) => (
+              <LI key={lookbook.id}>
+                <LookbookBox>
+                  <NavLink
+                    to={lookbook.path}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <ImgWrapper>
+                      {index >= 6 && <Fog />}
+                      <img src={lookbook.img} alt="이미지" />
+                    </ImgWrapper>
+                  </NavLink>
+                  <h3>{lookbook.title}</h3>
+                  <p>{lookbook.date}</p>
+                  {index >= 6 && <EndEvent>종료</EndEvent>}
+                </LookbookBox>
+              </LI>
+            ))}
+          </UI>
         </Content>
-        </Container>
+      </Container>
     </>
   );
 }

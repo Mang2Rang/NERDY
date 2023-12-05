@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { Autoplay, FreeMode } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 const Container = styled.div`
   position: sticky;
@@ -8,6 +9,9 @@ const Container = styled.div`
   height: 38px;
   overflow: hidden;
   transition: 0.2s;
+  .swiper-wrapper {
+    transition-timing-function: linear;
+  }
 `;
 
 const Link = styled.a`
@@ -25,15 +29,15 @@ export function SlideBar() {
           slidesPerView={5}
           spaceBetween={10}
           loop={true}
-          speed={10000}
+          speed={8000}
           autoplay={{ delay: 0, disableOnInteraction: false }}
           modules={[Autoplay]}
         >
-          <SwiperSlide>
+          <testSwiper>
             <Link href="https://whoisnerdy.com/event/23purplefri.html">
               널디 퍼플 프라이데이! 전 품목 최대 83% 할인{" "}
             </Link>
-          </SwiperSlide>
+          </testSwiper>
           <SwiperSlide>
             <Link href="https://whoisnerdy.com/event/23purplefri.html">
               널디 퍼플 프라이데이! 전 품목 최대 83% 할인{" "}

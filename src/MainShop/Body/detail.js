@@ -89,28 +89,31 @@ const SelectBoxWrapper = styled.div`
   margin-top: 10px;
 `;
 
-export function Item() {
+export function Detail() {
   const product = products[0]; // 여기에서 원하는 상품을 선택하거나 매핑하는 로직을 추가
+  const [selectItemList, setSelectItemList] = useState([]);
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const handleColorChange = (event) => {
     setSelectedColor(event.target.value);
   };
+  //주문 시 옵션 값이 전달되어야함.
   const COPTIONS = [
     { value: "", name: "-[필수] 옵션을 선택해주세요-", disabled: true },
     { value: "black", name: "Black" },
     { value: "white", name: "White" },
     { value: "purple", name: "Purple" },
   ];
-  const handleSizeChange = (event) => {
-    setSelectedSize(event.target.value);
-  };
+  //주문 시 옵션 값이 전달되어야함.
   const SOPTIONS = [
     { value: "", name: "-[필수] 옵션을 선택해주세요-", disabled: true },
     { value: "L", name: "L" },
     { value: "M", name: "M" },
     { value: "S", name: "S" },
   ];
+  const handleSizeChange = (event) => {
+    setSelectedSize(event.target.value);
+  };
   return (
     <Ibox>
       <Iimg src={product.imageUrl} alt="image" />

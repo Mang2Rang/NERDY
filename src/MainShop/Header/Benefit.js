@@ -15,9 +15,18 @@ export function Benefit() {
     <>
       <Container>
         <BenefitBox>
-          <img src="https://whoisnerdy.com/web/upload/event/2022/ncrew_01_2.png" alt=""/>
-          <img src="https://whoisnerdy.com/web/upload/event/2022/ncrew_02_2.png" alt=""/>
-          <img src="https://whoisnerdy.com/web/upload/event/2022/ncrew_04_2.png" alt=""/>
+          <img
+            src="https://whoisnerdy.com/web/upload/event/2022/ncrew_01_2.png"
+            alt=""
+          />
+          <img
+            src="https://whoisnerdy.com/web/upload/event/2022/ncrew_02_2.png"
+            alt=""
+          />
+          <img
+            src="https://whoisnerdy.com/web/upload/event/2022/ncrew_04_2.png"
+            alt=""
+          />
         </BenefitBox>
       </Container>
     </>

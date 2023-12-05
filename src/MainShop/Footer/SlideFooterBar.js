@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import "../Style/SlideFooterBar.css";
+import "swiper/css";
 
 const Container = styled.div`
   position: relative;
@@ -10,6 +10,9 @@ const Container = styled.div`
   overflow: hidden;
   transition: 0.2s;
   padding-bottom: 50px;
+  .swiper-wrapper {
+    transition-timing-function: linear;
+  }
 `;
 const ImgDiv = styled.div`
   padding-top: 14px;
@@ -23,9 +26,10 @@ export function SlideFooterBar() {
     <>
       <Container>
         <Swiper
+          id="SlideFooterBar_Swiper"
           slidesPerView={13}
           loop={true}
-          speed={9000}
+          speed={8000}
           autoplay={{ delay: 0, disableOnInteraction: false }}
           modules={[Autoplay]}
         >

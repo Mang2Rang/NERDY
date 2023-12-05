@@ -8,7 +8,7 @@ import { Register } from "./Header/Register";
 import { Cart } from "./Header/Cart";
 import { Mypage } from "./Header/Mypage";
 import { Search } from "./Header/Search";
-import { Item } from "./Body/Item";
+import { Detail } from "./Body/detail";
 import { Layout } from "./Layout";
 import { Shoes } from "./Header/Shoes";
 import { Gift } from "./Header/Gift";
@@ -28,13 +28,11 @@ import { Logout } from "./Header/Logout";
 const client = new QueryClient();
 export const MyContext = createContext();
 
-
 export function NerdyShop() {
   const [myGlobalState, setMyGlobalState] = useState(null);
-  const [loginState, setLoginState] =useState(
+  const [loginState, setLoginState] = useState(
     JSON.parse(localStorage.getItem("loginState"))
   );
-
 
   return (
     <>
@@ -44,7 +42,7 @@ export function NerdyShop() {
             myGlobalState,
             setMyGlobalState,
             loginState,
-            setLoginState
+            setLoginState,
           }}
         >
           <BrowserRouter>
@@ -68,7 +66,7 @@ export function NerdyShop() {
                 <Route path="cart" element={<Cart />} />
                 <Route path="gift" element={<Gift />} />
                 <Route path="member" element={<Mypage />} />
-                <Route path="item" element={<Item />} />
+                <Route path="detail" element={<Detail />} />
                 <Route path="*" element={<Error />} />
                 <Route path="home" element={<Home />} />
               </Route>

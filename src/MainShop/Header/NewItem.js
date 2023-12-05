@@ -103,6 +103,21 @@ const ItemTitle = styled.div`
   }
 `;
 
+const Basket = styled.div`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  background: url(https://whoisnerdy.com/web/upload/images/ico_cart_6.png?v=1) 0
+    0;
+  background-size: 36px 36px;
+`;
+const Box = styled.div`
+  padding: 0 10px;
+  overflow: hidden;
+`;
 export function NewItem() {
   const [newitemList, setNewItemList] = useState([]);
 
@@ -130,19 +145,22 @@ export function NewItem() {
         <Ul>
           {newitemList.map((newitem, index) => (
             <Li key={newitem.id}>
-              <Thumbnail>
-                <NavLink
-                  to="/item"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  <a href={newitem.link}>
-                    <img src={newitem.mainimg} alt="이미지" />
-                  </a>
-                </NavLink>
-                <BestNum>
-                  <p>Best</p>
-                  <p>{index + 1}</p>
-                </BestNum>
+              <Box>
+                <Thumbnail>
+                  <NavLink
+                    to="/detail"
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <a href={newitem.link}>
+                      <img src={newitem.mainimg} alt="이미지" />
+                    </a>
+                  </NavLink>
+                  <Basket></Basket>
+                  <BestNum>
+                    <p>Best</p>
+                    <p>{index + 1}</p>
+                  </BestNum>
+                </Thumbnail>
                 <ItemIf>
                   <Txt>
                     <p>★ 평점</p>
@@ -153,7 +171,7 @@ export function NewItem() {
                     <Price>{PriceCalc(newitem.price)}원</Price>
                   </Coast>
                 </ItemIf>
-              </Thumbnail>
+              </Box>
             </Li>
           ))}
         </Ul>

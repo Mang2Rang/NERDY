@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Kakao } from "./Body/Kakao";
 import { Outlet } from "react-router-dom";
 import { SlideBar } from "./Header/SlideBar";
+// import { LoopSlide } from "./Body/SlideBox/LoopSlide";
 
 const StyledFooter = styled.div`
   width: 100%;
@@ -15,6 +16,7 @@ const StyledFooter = styled.div`
 export function Layout() {
   return (
     <>
+      {/* <LoopSlide /> */}
       <SlideBar />
       <HeaderBar />
       <Outlet />
